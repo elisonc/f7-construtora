@@ -126,7 +126,7 @@
 @media (max-width: 900px) {
   .dif-grade,
   .dif-grade.tres {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -219,6 +219,18 @@
 /* Rodapé novo */
 .rodape-grade {
   grid-template-columns: 1.4fr 1.2fr 1fr 1.2fr;
+}
+
+@media (max-width: 900px) {
+  .rodape-grade {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .rodape-grade {
+    grid-template-columns: 1fr;
+  }
 }
 
 .rodape-site {

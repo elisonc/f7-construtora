@@ -415,7 +415,20 @@ h2 {
   border-color: var(--azul);
 }
 
+.projetos {
+  overflow-x: clip;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
 .projetos-trilho {
+  min-width: 0;
+  max-width: 100%;
+  overscroll-behavior-x: contain;
   display: flex;
   gap: 24px;
   overflow-x: auto;
