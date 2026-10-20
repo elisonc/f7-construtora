@@ -1,6 +1,6 @@
 # Define as duas variações de cor do site (bloco de variáveis do base.css):
 #   tema claro  = AZUL marinho (a paleta original aprovada)
-#   tema escuro = BORDÔ escuro
+#   tema escuro = fundo AZUL com letras brancas
 # As "ilhas" (topo, rodapé, faixas) ficam sempre escuras, na cor da paleta ativa.
 import os
 os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src", "styles"))
@@ -9,28 +9,28 @@ base = open("base.css", encoding="utf-8").read()
 fim = base.index(".botao-primario.sobre-escuro")
 resto = base[fim:]
 
-blocos = '''/* Duas variações de cor. Tema escuro = Bordô (padrão do :root). Tema claro = Azul marinho. */
+blocos = '''/* Duas variações de cor. Tema escuro = fundo azul com letras brancas. Tema claro = fundo branco com letras azuis (o inverso). */
 :root,
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --preto: #14060a;
-  --fundo: #1a080c;
-  --fundo-2: #240c12;
-  --superficie: #2e1018;
-  --superficie-2: #3d1621;
-  --borda: rgba(240, 170, 180, 0.15);
-  --borda-forte: rgba(240, 170, 180, 0.32);
-  --texto: #f8eef0;
-  --texto-suave: #d6bcc1;
-  --texto-fraco: #a88a90;
-  --azul-claro: #f2c6cc;
-  --azul: #d9808f;
-  --azul-medio: #a8344a;
-  --azul-profundo: #5c1624;
+  --preto: #050f1f;
+  --fundo: #071428;
+  --fundo-2: #0a1c36;
+  --superficie: #0d2342;
+  --superficie-2: #122c52;
+  --borda: rgba(120, 170, 230, 0.13);
+  --borda-forte: rgba(120, 170, 230, 0.3);
+  --texto: #f1f5fb;
+  --texto-suave: #a8b8cf;
+  --texto-fraco: #7388a6;
+  --azul-claro: #9cc4f0;
+  --azul: #4c8fd6;
+  --azul-medio: #1f5fa8;
+  --azul-profundo: #123e73;
   --sucesso: #7fc8a0;
   --alerta: #e8b45c;
   --perigo: #e57373;
-  --gradiente-marca: linear-gradient(180deg, #ffffff 10%, #f2c6cc 55%, #d9808f 100%);
+  --gradiente-marca: linear-gradient(180deg, #ffffff 10%, #9cc4f0 55%, #5a9cc5 100%);
   --raio: 18px;
   --raio-sm: 11px;
   --fonte-titulo: "Montserrat Variable", system-ui, sans-serif;
@@ -39,20 +39,20 @@ blocos = '''/* Duas variações de cor. Tema escuro = Bordô (padrão do :root).
   --largura: 1200px;
   --curva: cubic-bezier(0.2, 0.7, 0.2, 1);
   --leve: rgba(255, 255, 255, 0.05);
-  --vidro: rgba(20, 6, 10, 0.8);
-  --vidro-forte: rgba(20, 6, 10, 0.97);
-  --btn-bg: linear-gradient(180deg, #f8eef0, #ecd0d5);
-  --btn-texto: #2a0c14;
-  --marca-1: #f8eef0;
-  --marca-2: #ecd0d5;
-  --marca-3: #d9808f;
-  --marca-4: #c9a678;
-  --acento-rgb: 217, 128, 143;
-  --borda-rgb: 240, 170, 180;
-  --ilha-rgb: 20, 6, 10;
-  --ilha-a: #14060a;
-  --ilha-b: #3a1220;
-  --ilha-c: #1e0a10;
+  --vidro: rgba(5, 15, 31, 0.8);
+  --vidro-forte: rgba(5, 15, 31, 0.97);
+  --btn-bg: linear-gradient(180deg, #ffffff, #cfe2fa);
+  --btn-texto: #06142b;
+  --marca-1: #ffffff;
+  --marca-2: #cfe2fa;
+  --marca-3: #4c8fd6;
+  --marca-4: #9fb0c7;
+  --acento-rgb: 76, 143, 214;
+  --borda-rgb: 120, 170, 230;
+  --ilha-rgb: 5, 15, 31;
+  --ilha-a: #0a1a33;
+  --ilha-b: #0e2a52;
+  --ilha-c: #0b2040;
 }
 
 :root[data-theme="light"] {
