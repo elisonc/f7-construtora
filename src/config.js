@@ -5,8 +5,8 @@ export const empresa = {
   nomeCurto: "F7",
   slogan: "Construímos com quem constrói.",
   site: "www.f7engenhariaestrategica.com.br", // domínio ainda não registrado: aparece só como texto no rodapé
-  whatsapp: "", // só dígitos com 55 + DDD
-  telefone: "",
+  whatsapp: "5541999720933", // só dígitos com 55 + DDD (confirmar o 9 inicial)
+  telefone: "(41) 99972-0933",
   emails: [], // ex.: ["contato@f7engenhariaestrategica.com.br"]
   email: "",
   endereco: "Avenida República Argentina, 1350 — Água Verde, Curitiba/PR",

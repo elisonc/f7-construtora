@@ -218,8 +218,8 @@
   align-items: center;
   overflow: hidden;
   padding: 120px 0 96px;
-  background: radial-gradient(ellipse 80% 60% at 72% 95%, rgba(18, 62, 115, 0.55), transparent 70%),
-    radial-gradient(ellipse 50% 50% at 8% 8%, rgba(31, 95, 168, 0.16), transparent 70%), var(--preto);
+  background: radial-gradient(ellipse 80% 60% at 72% 95%, rgba(var(--acento-rgb), 0.55), transparent 70%),
+    radial-gradient(ellipse 50% 50% at 8% 8%, rgba(var(--acento-rgb), 0.16), transparent 70%), var(--preto);
 }
 
 .hero-fundo {
@@ -237,7 +237,7 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image: linear-gradient(90deg, rgba(120, 170, 230, 0.06) 1px, transparent 1px);
+  background-image: linear-gradient(90deg, rgba(var(--borda-rgb), 0.06) 1px, transparent 1px);
   background-size: 120px 100%;
   mask-image: linear-gradient(180deg, transparent, #000 30%, #000 70%, transparent);
 }
@@ -326,7 +326,7 @@
   width: 100%;
   max-width: 520px;
   overflow: visible;
-  filter: drop-shadow(0 30px 60px rgba(31, 95, 168, 0.35));
+  filter: drop-shadow(0 30px 60px rgba(var(--acento-rgb), 0.35));
 }
 
 .hero-rolar {
@@ -448,20 +448,20 @@
   gap: 2px;
   padding: 18px 20px;
   border-radius: 16px;
-  background: rgba(5, 15, 31, 0.72);
+  background: rgba(var(--ilha-rgb), 0.72);
   backdrop-filter: blur(10px);
   border: 1px solid var(--borda-forte);
 }
 
 .sobre-flutuante strong {
-  color: #f1f5fb;
+  color: var(--texto);
   font-family: var(--fonte-titulo);
   font-size: 1.15rem;
 }
 
 .sobre-flutuante span {
   font-size: 0.9rem;
-  color: #a8b8cf;
+  color: var(--texto-suave);
 }
 
 .valores {
@@ -511,7 +511,7 @@
 .numeros {
   padding: 56px 0;
   border-block: 1px solid var(--borda);
-  background: linear-gradient(90deg, rgba(18, 62, 115, 0.14), transparent 40%, transparent 60%, rgba(18, 62, 115, 0.14));
+  background: linear-gradient(90deg, rgba(var(--acento-rgb), 0.14), transparent 40%, transparent 60%, rgba(var(--acento-rgb), 0.14));
 }
 
 .numeros-grade {
@@ -802,7 +802,7 @@
   color: var(--btn-texto);
   background: var(--btn-bg);
   border-color: transparent;
-  box-shadow: 0 0 0 6px rgba(76, 143, 214, 0.15);
+  box-shadow: 0 0 0 6px rgba(var(--acento-rgb), 0.15);
 }
 
 .processo-etapa h3 {
@@ -854,8 +854,8 @@
   height: 22px;
   margin-top: 2px;
   border-radius: 50%;
-  border: 1px solid rgba(76, 143, 214, 0.45);
-  background: rgba(76, 143, 214, 0.14)
+  border: 1px solid rgba(var(--acento-rgb), 0.45);
+  background: rgba(var(--acento-rgb), 0.14)
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2l2.3 2.3 4.7-5' stroke='%23b9d8ea' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E")
     center / 12px no-repeat;
 }
@@ -865,7 +865,7 @@
   border-radius: 24px;
   border: 1px solid var(--borda-forte);
   background: linear-gradient(180deg, var(--superficie-2), var(--superficie));
-  box-shadow: 0 40px 100px -30px rgba(31, 95, 168, 0.4);
+  box-shadow: 0 40px 100px -30px rgba(var(--acento-rgb), 0.4);
   transform: perspective(1200px) rotateY(-7deg) rotateX(3deg);
   transition: transform 0.8s var(--curva);
 }
@@ -928,7 +928,7 @@
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, #1f5fa8, #9cc4f0);
+  background: linear-gradient(90deg, var(--azul-medio), var(--azul-claro));
 }
 
 .demo-fotos {
@@ -940,15 +940,15 @@
 .demo-fotos span {
   aspect-ratio: 4 / 3;
   border-radius: 10px;
-  background: linear-gradient(135deg, #123e73, #0b1117);
+  background: linear-gradient(135deg, var(--azul-profundo), var(--ilha-a));
 }
 
 .demo-fotos span:nth-child(2) {
-  background: linear-gradient(135deg, #1f5fa8, #0f2433);
+  background: linear-gradient(135deg, var(--azul-medio), var(--azul-profundo));
 }
 
 .demo-fotos span:nth-child(3) {
-  background: linear-gradient(135deg, #9cc4f033, #123e73);
+  background: linear-gradient(135deg, var(--azul-claro)33, var(--azul-profundo));
 }
 
 @media (max-width: 900px) {
@@ -1030,7 +1030,7 @@
   padding: 10px;
   margin-bottom: 18px;
   border-radius: 12px;
-  background: rgba(76, 143, 214, 0.12);
+  background: rgba(var(--acento-rgb), 0.12);
   stroke: var(--azul-claro);
   fill: none;
   stroke-width: 1.6;
@@ -1062,7 +1062,7 @@
 /* Contato */
 
 .contato {
-  background: radial-gradient(ellipse 60% 60% at 0% 100%, rgba(18, 62, 115, 0.25), transparent 70%);
+  background: radial-gradient(ellipse 60% 60% at 0% 100%, rgba(var(--acento-rgb), 0.25), transparent 70%);
 }
 
 .contato-grade {
@@ -1250,7 +1250,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(5, 15, 31, 0.8), rgba(5, 15, 31, 0.15) 35%, var(--fundo) 98%);
+  background: linear-gradient(180deg, rgba(var(--ilha-rgb), 0.8), rgba(var(--ilha-rgb), 0.15) 35%, var(--fundo) 98%);
 }
 
 .emp-banner-texto {

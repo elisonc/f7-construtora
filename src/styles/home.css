@@ -36,8 +36,8 @@ h2 {
 .hero-veu {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(5, 15, 31, 0.82) 0%, rgba(5, 15, 31, 0.5) 55%, rgba(5, 15, 31, 0.25) 100%),
-    linear-gradient(180deg, rgba(5, 15, 31, 0.55), transparent 30%, rgba(5, 15, 31, 0.4));
+  background: linear-gradient(90deg, rgba(var(--ilha-rgb), 0.82) 0%, rgba(var(--ilha-rgb), 0.5) 55%, rgba(var(--ilha-rgb), 0.25) 100%),
+    linear-gradient(180deg, rgba(var(--ilha-rgb), 0.55), transparent 30%, rgba(var(--ilha-rgb), 0.4));
 }
 
 .hero {
@@ -112,7 +112,7 @@ h2 {
 .hero-texto {
   max-width: 54ch;
   font-size: clamp(1rem, 1.4vw, 1.2rem);
-  color: #d3e0ea;
+  color: rgba(255, 255, 255, 0.86);
   margin-bottom: 34px;
 }
 
@@ -132,7 +132,7 @@ h2 {
   height: 44px;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.35);
-  background: rgba(5, 15, 31, 0.35);
+  background: rgba(var(--ilha-rgb), 0.35);
   backdrop-filter: blur(6px);
   color: #fff;
   font-size: 1.5rem;
@@ -261,7 +261,7 @@ h2 {
 
 .servicos {
   padding: clamp(60px, 8vw, 100px) 0;
-  background: linear-gradient(135deg, #0a1a33, #0e2a52 55%, #0a1a33);
+  background: linear-gradient(135deg, var(--ilha-a), var(--ilha-b) 55%, var(--ilha-a));
 }
 
 .servicos-grade {
@@ -376,7 +376,7 @@ h2 {
 /* Projetos em carrossel */
 .projetos {
   padding: clamp(80px, 10vw, 130px) 0;
-  background: linear-gradient(180deg, #0a1c36, #0b2040);
+  background: linear-gradient(180deg, var(--ilha-c), var(--ilha-c));
 }
 
 .projetos-topo {
@@ -497,8 +497,8 @@ h2 {
   overflow: hidden;
   padding: clamp(80px, 11vw, 140px) 0;
   text-align: center;
-  background: radial-gradient(ellipse 70% 80% at 50% 120%, rgba(31, 95, 168, 0.55), transparent 70%), #050f1f;
-  color: #f1f5fb;
+  background: radial-gradient(ellipse 70% 80% at 50% 120%, rgba(var(--acento-rgb), 0.55), transparent 70%), var(--ilha-a);
+  color: var(--texto);
 }
 
 .cta-faixa .container {
@@ -509,11 +509,11 @@ h2 {
 .cta-faixa h2 {
   max-width: 20ch;
   margin-inline: auto;
-  color: #f1f5fb;
+  color: var(--texto);
 }
 
 .cta-faixa p {
-  color: #a8b8cf;
+  color: var(--texto-suave);
   margin-bottom: 30px;
 }
 
@@ -576,7 +576,7 @@ h2 {
   overflow: hidden;
   min-height: 300px;
   color: var(--texto);
-  background: #050f1f;
+  background: var(--ilha-a);
 }
 
 .conta-capa {
@@ -590,7 +590,7 @@ h2 {
 .conta-capa-veu {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(5, 15, 31, 0.9), rgba(5, 15, 31, 0.55) 60%, rgba(5, 15, 31, 0.35));
+  background: linear-gradient(90deg, rgba(var(--ilha-rgb), 0.9), rgba(var(--ilha-rgb), 0.55) 60%, rgba(var(--ilha-rgb), 0.35));
 }
 
 .conta-resumo-texto,
@@ -611,7 +611,7 @@ h2 {
   min-height: 420px;
   border-radius: 18px;
   border: 1px solid var(--borda);
-  background: #050f1f;
+  background: var(--ilha-a);
   color: var(--texto);
 }
 
@@ -631,7 +631,7 @@ h2 {
 .doc-veu {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(5, 15, 31, 0.35), rgba(5, 15, 31, 0.82));
+  background: linear-gradient(180deg, rgba(var(--ilha-rgb), 0.35), rgba(var(--ilha-rgb), 0.82));
 }
 
 .doc-conteudo {
@@ -685,7 +685,7 @@ h2 {
 
 .doc-botao:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 30px -14px rgba(76, 143, 214, 0.8);
+  box-shadow: 0 14px 30px -14px rgba(var(--acento-rgb), 0.8);
 }
 
 .rodape-animacao {

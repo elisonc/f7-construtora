@@ -8,6 +8,7 @@ import "./styles/painel.css";
 import "./styles/home.css";
 import "./styles/menu.css";
 import "./styles/site2.css";
+import "./styles/logo.css";
 import App from "./App.jsx";
 
 createRoot(document.getElementById("root")).render(

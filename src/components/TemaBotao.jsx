@@ -19,7 +19,7 @@ export default function TemaBotao({ className = "" }) {
     setTimeout(() => raiz.classList.remove("tema-muda"), 450);
   }
 
-  const proximo = tema === "light" ? "escuro" : "claro";
+  const proximo = tema === "light" ? "Bordô" : "Azul";
   return (
     <button type="button" className={`tema-botao ${className}`} onClick={alternar} aria-label={`Mudar para o tema ${proximo}`} title={`Tema ${proximo}`}>
       <svg className="lua" viewBox="0 0 24 24" aria-hidden="true">

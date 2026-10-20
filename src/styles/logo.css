@@ -1,0 +1,168 @@
+/* Logo tipográfica: F7 unido + nome pequeno ao lado */
+.marca-f7 {
+  display: inline-flex;
+  align-items: flex-end;
+  width: auto;
+  max-width: none;
+  overflow: visible;
+  font-family: var(--fonte-titulo);
+  font-weight: 900;
+  font-size: var(--f7-tam, 2.5rem);
+  line-height: 0.82;
+  letter-spacing: -0.1em;
+  color: var(--marca-1);
+  filter: none;
+}
+
+.marca-f7 i {
+  display: inline-block;
+  font-style: normal;
+}
+
+/* o 7 encosta no F e divide a mesma linha de topo */
+.marca-f7 i:last-child {
+  margin-left: -0.06em;
+  color: var(--marca-3);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.logo .marca-f7 {
+  --f7-tam: 2.55rem;
+}
+
+.logo-sub {
+  display: grid;
+  gap: 3px;
+  padding-left: 0.7rem;
+  border-left: 2px solid var(--marca-4);
+  font-family: var(--fonte-texto);
+  font-size: 0.6rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--texto);
+  white-space: nowrap;
+}
+
+.intro-marca {
+  --f7-tam: clamp(6rem, 22vw, 10rem);
+  width: auto;
+}
+
+.entrar-visual .marca-f7 {
+  --f7-tam: clamp(6rem, 13vw, 10rem);
+  width: auto;
+  filter: none;
+}
+
+.cta-marca {
+  --f7-tam: min(38vw, 32rem);
+  position: absolute;
+  left: 50%;
+  bottom: -6%;
+  width: auto;
+  transform: translateX(-50%);
+  opacity: 0.08;
+}
+
+.doc-marca {
+  --f7-tam: 2.3rem;
+  width: auto;
+  margin: 0 auto 4px;
+}
+
+.nao-encontrado-marca {
+  --f7-tam: 5.5rem;
+  width: auto;
+  margin: 0 auto 24px;
+}
+
+.gestor-logo .marca-f7 {
+  --f7-tam: 1.9rem;
+  width: auto;
+}
+
+.intro-texto small {
+  display: block;
+  margin-top: 14px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+}
+
+.intro-texto b {
+  display: none;
+}
+
+@media (max-width: 520px) {
+  .logo .marca-f7 {
+    --f7-tam: 2.2rem;
+  }
+
+  .logo-sub {
+    font-size: 0.52rem;
+  }
+}
+
+/* Menu do celular: grupos legíveis, um link por linha */
+.menu-mobile {
+  gap: 0;
+}
+
+.menu-mobile > a:not(.botao),
+.menu-mobile .menu-mobile-grupo a {
+  display: block;
+}
+
+.menu-mobile > a:not(.botao) {
+  font-family: var(--fonte-titulo);
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--borda);
+}
+
+.menu-mobile-grupo {
+  padding: 16px 0 10px;
+  border-bottom: 1px solid var(--borda);
+}
+
+.menu-mobile-grupo h3 {
+  margin: 0 0 6px;
+  font-family: var(--fonte-texto);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--azul);
+}
+
+.menu-mobile .menu-mobile-grupo a {
+  padding: 11px 0 11px 14px;
+  border-left: 2px solid var(--borda-forte);
+  margin-left: 2px;
+  font-family: var(--fonte-texto);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--texto);
+}
+
+.menu-mobile .menu-mobile-grupo a + a {
+  margin-top: 4px;
+}
+
+.menu-mobile .botao {
+  margin-top: 24px;
+  width: 100%;
+}
+
+.menu-mobile .botao + .botao {
+  margin-top: 12px;
+}

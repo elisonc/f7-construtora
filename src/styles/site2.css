@@ -25,7 +25,7 @@
 
 .obras-topo {
   padding: clamp(120px, 14vw, 170px) 0 clamp(48px, 7vw, 80px);
-  background: linear-gradient(135deg, #0a2342, #0d2f5c 60%, #0a2342);
+  background: linear-gradient(135deg, var(--ilha-a), var(--ilha-b) 60%, var(--ilha-a));
 }
 
 .obras-topo h1 {
@@ -57,7 +57,7 @@
 .obras-abas a.ativa,
 .obras-abas a:hover {
   background: #fff;
-  color: #0a2342;
+  color: var(--ilha-a);
 }
 
 .grade-obras-site {
@@ -115,7 +115,7 @@
   padding: 11px;
   margin-bottom: 18px;
   border-radius: 12px;
-  background: rgba(76, 143, 214, 0.14);
+  background: rgba(var(--acento-rgb), 0.14);
   fill: none;
   stroke: var(--azul);
   stroke-width: 1.6;

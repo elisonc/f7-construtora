@@ -30,7 +30,7 @@ export default function Intro({ aoTerminar }) {
       <div className="intro-conteudo">
         <MarcaF7 className="intro-marca" />
         <div className="intro-texto">
-          <b>F7</b>
+          
           <small>Engenharia Estratégica</small>
         </div>
       </div>

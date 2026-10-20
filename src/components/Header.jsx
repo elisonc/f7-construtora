@@ -5,6 +5,7 @@ import { Magnetico } from "./Efeitos.jsx";
 import TemaBotao from "./TemaBotao.jsx";
 import { useAuth, inicioDoPapel } from "../lib/auth.jsx";
 import { gsap, useGSAP, reduzirMovimento } from "../lib/gsap.js";
+import { linkWhatsApp } from "../config.js";
 
 // Menu: itens simples e menus suspensos (lista para baixo).
 const MENU = [
@@ -173,6 +174,11 @@ export default function Header() {
             <Link to={destinoArea} className="botao botao-primario">
               {textoArea}
             </Link>
+            {linkWhatsApp() && (
+              <a href={linkWhatsApp()} target="_blank" rel="noreferrer" className="botao botao-contorno">
+                Falar no WhatsApp
+              </a>
+            )}
           </>
         )}
       </div>
