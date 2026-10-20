@@ -153,6 +153,7 @@ function dadosEmpreendimento(d) {
     unidades: texto(d.unidades, 80),
     entrega: texto(d.entrega, 60),
     endereco: texto(d.endereco, 160),
+    percentual: d.percentual === "" || d.percentual == null ? null : inteiro(d.percentual, 0, 100),
     destaque: d.destaque ? 1 : 0,
     publicado: d.publicado === false ? 0 : 1,
     ordem: inteiro(d.ordem ?? 0, 0, 999),
@@ -164,7 +165,7 @@ function dadosEmpreendimento(d) {
 rota("GET", "/api/empreendimentos", ({ res }) => {
   const lista = db
     .prepare(
-      `SELECT id, slug, nome, local, status, resumo, area, unidades, entrega, endereco, capa, destaque
+      `SELECT id, slug, nome, local, status, resumo, area, unidades, entrega, endereco, percentual, capa, destaque
        FROM empreendimentos WHERE publicado = 1 ORDER BY destaque DESC, ordem, id DESC`
     )
     .all();
@@ -672,8 +673,8 @@ rota("POST", "/api/gestor/empreendimentos", async ({ req, res }) => {
   const e = dadosEmpreendimento(await lerJson(req));
   const { lastInsertRowid } = db
     .prepare(
-      `INSERT INTO empreendimentos (slug, nome, local, status, resumo, descricao, area, unidades, entrega, endereco, destaque, publicado, ordem)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+      `INSERT INTO empreendimentos (slug, nome, local, status, resumo, descricao, area, unidades, entrega, endereco, percentual, destaque, publicado, ordem)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
     )
     .run(
       slugDe(e.nome),
@@ -686,6 +687,7 @@ rota("POST", "/api/gestor/empreendimentos", async ({ req, res }) => {
       e.unidades,
       e.entrega,
       e.endereco,
+      e.percentual,
       e.destaque,
       e.publicado,
       e.ordem
@@ -702,9 +704,18 @@ rota("PUT", "/api/gestor/empreendimentos/:id", async ({ req, res, params }) => {
   const e = dadosEmpreendimento(await lerJson(req));
   db.prepare(
     `UPDATE empreendimentos SET nome = ?, local = ?, status = ?, resumo = ?, descricao = ?, area = ?,
-       unidades = ?, entrega = ?, endereco = ?, destaque = ?, publicado = ?, ordem = ? WHERE id = ?`
-  ).run(e.nome, e.local, e.status, e.resumo, e.descricao, e.area, e.unidades, e.entrega, e.endereco, e.destaque, e.publicado, e.ordem, id);
+       unidades = ?, entrega = ?, endereco = ?, percentual = ?, destaque = ?, publicado = ?, ordem = ? WHERE id = ?`
+  ).run(e.nome, e.local, e.status, e.resumo, e.descricao, e.area, e.unidades, e.entrega, e.endereco, e.percentual, e.destaque, e.publicado, e.ordem, id);
   json(res, 200, { ok: true });
+});
+
+rota("PUT", "/api/gestor/empreendimentos/:id/andamento", async ({ req, res, params }) => {
+  exigirUsuario(req, "gestor");
+  const { percentual } = await lerJson(req);
+  const valor = percentual === null || percentual === "" ? null : inteiro(percentual, 0, 100);
+  const { changes } = db.prepare("UPDATE empreendimentos SET percentual = ? WHERE id = ?").run(valor, idNumero(params.id));
+  if (!changes) throw new ErroHttp(404, "Empreendimento não encontrado.");
+  json(res, 200, { percentual: valor });
 });
 
 rota("DELETE", "/api/gestor/empreendimentos/:id", ({ req, res, params }) => {

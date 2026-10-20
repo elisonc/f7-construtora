@@ -148,7 +148,7 @@ db.exec(`
 `);
 
 // Colunas acrescentadas depois da primeira versão (bancos antigos são atualizados aqui).
-for (const [coluna, tipo] of [["unidades", "TEXT"], ["entrega", "TEXT"], ["endereco", "TEXT"]]) {
+for (const [coluna, tipo] of [["unidades", "TEXT"], ["entrega", "TEXT"], ["endereco", "TEXT"], ["percentual", "INTEGER"]]) {
   try {
     db.exec(`ALTER TABLE empreendimentos ADD COLUMN ${coluna} ${tipo}`);
   } catch {

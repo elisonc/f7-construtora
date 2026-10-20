@@ -78,6 +78,17 @@ export default function Empreendimento() {
               ))}
             </ul>
           )}
+          {andamento && item.percentual != null && (
+            <div className="emp-andamento">
+              <div className="projeto-andamento-topo">
+                <span>Andamento da obra</span>
+                <strong>{item.percentual}% concluído</strong>
+              </div>
+              <div className="barra">
+                <i style={{ width: `${item.percentual}%` }} />
+              </div>
+            </div>
+          )}
           {item.resumo && <p className="emp-resumo">{item.resumo}</p>}
           {(item.descricao || "").split(/\n+/).filter(Boolean).map((paragrafo, i) => (
             <p key={i}>{paragrafo}</p>

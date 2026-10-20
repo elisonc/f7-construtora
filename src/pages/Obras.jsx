@@ -18,6 +18,17 @@ export function CartaoObra({ item }) {
       <h3>{item.nome}</h3>
       {item.local && <span className="projeto-local">{item.local}</span>}
       <p>{item.resumo}</p>
+      {andamento && item.percentual != null && (
+        <div className="projeto-andamento" aria-label={`${item.percentual}% da obra concluída`}>
+          <div className="projeto-andamento-topo">
+            <span>Andamento da obra</span>
+            <strong>{item.percentual}%</strong>
+          </div>
+          <div className="barra">
+            <i style={{ width: `${item.percentual}%` }} />
+          </div>
+        </div>
+      )}
       <ul className="projeto-dados">
         {item.unidades && <li>{item.unidades}</li>}
         {item.entrega && (

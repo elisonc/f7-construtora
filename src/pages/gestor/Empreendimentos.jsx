@@ -98,6 +98,10 @@ function FormEmpreendimento({ item, aoSalvar }) {
         </label>
       </div>
       <label className="campo">
+        <span>Andamento da obra em % (só para obras em andamento)</span>
+        <input name="percentual" type="number" min={0} max={100} defaultValue={item?.percentual ?? ""} placeholder="Ex.: 35" />
+      </label>
+      <label className="campo">
         <span>Endereço</span>
         <input name="endereco" defaultValue={item?.endereco ?? ""} maxLength={160} placeholder="Rua, número, bairro, cidade" />
       </label>
@@ -136,6 +140,51 @@ function FormEmpreendimento({ item, aoSalvar }) {
         </button>
       </div>
     </form>
+  );
+}
+
+// Barra de andamento da obra com ajuste na hora (salva ao soltar o controle).
+function Andamento({ item, aoSalvar }) {
+  const avisar = useAviso();
+  const [valor, setValor] = useState(item.percentual ?? 0);
+  useEffect(() => setValor(item.percentual ?? 0), [item.percentual]);
+
+  if (item.status !== "em_obras") {
+    return <div className="andamento andamento-fim">{item.status === "entregue" ? "Obra concluída" : ""}</div>;
+  }
+
+  async function salvar(novo) {
+    try {
+      await api(`/api/gestor/empreendimentos/${item.id}/andamento`, { metodo: "PUT", dados: { percentual: novo } });
+      aoSalvar(novo);
+      avisar(`${item.nome}: ${novo}% concluído. O site já mostra.`);
+    } catch (falha) {
+      avisar(falha.message, "erro");
+    }
+  }
+
+  return (
+    <div className="andamento">
+      <div className="andamento-topo">
+        <span>Andamento da obra</span>
+        <strong>{item.percentual == null ? "não informado" : `${valor}%`}</strong>
+      </div>
+      <div className="barra">
+        <i style={{ width: `${item.percentual == null ? 0 : valor}%` }} />
+      </div>
+      <input
+        type="range"
+        min={0}
+        max={100}
+        step={5}
+        value={valor}
+        aria-label={`Andamento de ${item.nome}`}
+        onChange={(ev) => setValor(Number(ev.target.value))}
+        onMouseUp={() => salvar(valor)}
+        onTouchEnd={() => salvar(valor)}
+        onKeyUp={(ev) => ["ArrowLeft", "ArrowRight", "Home", "End"].includes(ev.key) && salvar(valor)}
+      />
+    </div>
   );
 }
 
@@ -192,6 +241,7 @@ export default function GestorEmpreendimentos() {
                 <strong>{e.nome}</strong>
                 <span>{e.local || "Sem localização"}</span>
               </div>
+              <Andamento item={e} aoSalvar={(valor) => setLista((l) => l.map((x) => (x.id === e.id ? { ...x, percentual: valor } : x)))} />
               <div className="linha-emp-etiquetas">
                 <span className={`etiqueta etiqueta-${e.status}`}>{STATUS_EMPREENDIMENTO[e.status]}</span>
                 {!e.publicado && <span className="etiqueta etiqueta-pausada">Oculto</span>}
