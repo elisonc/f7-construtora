@@ -112,11 +112,14 @@ export default function Header() {
     { scope: menuRef, dependencies: [menuAberto], revertOnUpdate: true }
   );
 
+  // Páginas sem foto/faixa escura no topo (privacidade, 404...) usam o cabeçalho com fundo sólido.
+  const p = local.pathname;
+  const temHero = p === "/" || p.startsWith("/obras/") || p === "/diferenciais" || p.startsWith("/empreendimentos/");
   const destinoArea = usuario ? inicioDoPapel(usuario.papel) : "/entrar";
   const textoArea = usuario ? (usuario.papel === "gestor" ? "Painel do gestor" : "Minha obra") : "Área do cliente";
 
   return (
-    <header className={`topo${rolado ? " rolado" : ""}${escondido && !menuAberto ? " escondido" : ""}`}>
+    <header className={`topo${rolado || !temHero ? " rolado" : ""}${escondido && !menuAberto ? " escondido" : ""}`}>
       <div className="topo-interno">
         <Link to="/" className="topo-logo" aria-label="F7 Engenharia Estratégica, página inicial">
           <Logo />

@@ -11,7 +11,7 @@
   --borda-forte: rgba(120, 170, 230, 0.3);
   --texto: #f1f5fb;
   --texto-suave: #a8b8cf;
-  --texto-fraco: #7388a6;
+  --texto-fraco: #8a9db8;
   --azul-claro: #9cc4f0;
   --azul: #4c8fd6;
   --azul-medio: #1f5fa8;
@@ -54,7 +54,7 @@
   --borda-forte: rgba(20, 50, 100, 0.28);
   --texto: #0a1b33;
   --texto-suave: #43587a;
-  --texto-fraco: #6a7f9e;
+  --texto-fraco: #51668a;
   --azul-claro: #123e73;
   --azul: #1f5fa8;
   --azul-medio: #3f84ab;
@@ -98,7 +98,7 @@
   --borda-forte: rgba(120, 170, 230, 0.3);
   --texto: #f1f5fb;
   --texto-suave: #a8b8cf;
-  --texto-fraco: #7388a6;
+  --texto-fraco: #8a9db8;
   --azul-claro: #9cc4f0;
   --azul: #4c8fd6;
   --gradiente-marca: linear-gradient(180deg, #ffffff 10%, #9cc4f0 55%, #5a9cc5 100%);
@@ -275,7 +275,7 @@ p {
   top: -100px;
   z-index: 300;
   background: var(--azul);
-  color: #041018;
+  color: #ffffff;
   padding: 10px 16px;
   border-radius: 8px;
   font-weight: 600;
@@ -608,7 +608,7 @@ textarea {
   background: rgba(var(--ilha-rgb), 0.72);
   backdrop-filter: blur(6px);
   border: 1px solid rgba(var(--borda-rgb), 0.3);
-  color: var(--azul-claro);
+  color: #cfe2fa;
 }
 
 .etiqueta-lancamento {
@@ -633,7 +633,7 @@ textarea {
 
 .etiqueta-novo {
   color: #fff;
-  background: var(--azul-medio);
+  background: #1f5fa8;
   border-color: transparent;
 }
 

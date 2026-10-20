@@ -18,6 +18,7 @@
   background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(var(--acento-rgb), 0.6), transparent 70%),
     linear-gradient(90deg, rgba(var(--borda-rgb), 0.05) 1px, transparent 1px) 0 0 / 90px 100%;
   border-right: 1px solid var(--borda);
+  background-color: var(--preto);
 }
 
 .entrar-visual .marca-f7 {

@@ -243,3 +243,31 @@
 .rodape-grade > div > span:not(.logo):not(.rodape-site) {
   overflow-wrap: anywhere;
 }
+
+/* Tema claro: vermelho, verde e âmbar legíveis sobre fundo branco */
+:root[data-theme="light"] .botao-perigo,
+:root[data-theme="light"] .confirmando {
+  color: #9b1f1f !important;
+}
+
+:root[data-theme="light"] .form-erro {
+  color: #9b1f1f;
+  background: rgba(200, 50, 50, 0.08);
+  border-color: rgba(200, 50, 50, 0.3);
+}
+
+:root[data-theme="light"] .variacao.desce {
+  color: #b42323;
+}
+
+:root[data-theme="light"] .variacao.sobe {
+  color: #1d7a56;
+}
+
+:root[data-theme="light"] .aviso-banner {
+  color: #6b4a08;
+}
+
+:root[data-theme="light"] .etapas li.completa .etapa-topo strong {
+  color: #1d7a56;
+}

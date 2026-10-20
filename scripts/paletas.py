@@ -22,7 +22,7 @@ blocos = '''/* Duas variações de cor. Tema escuro = fundo azul com letras bran
   --borda-forte: rgba(120, 170, 230, 0.3);
   --texto: #f1f5fb;
   --texto-suave: #a8b8cf;
-  --texto-fraco: #7388a6;
+  --texto-fraco: #8a9db8;
   --azul-claro: #9cc4f0;
   --azul: #4c8fd6;
   --azul-medio: #1f5fa8;
@@ -65,7 +65,7 @@ blocos = '''/* Duas variações de cor. Tema escuro = fundo azul com letras bran
   --borda-forte: rgba(20, 50, 100, 0.28);
   --texto: #0a1b33;
   --texto-suave: #43587a;
-  --texto-fraco: #6a7f9e;
+  --texto-fraco: #51668a;
   --azul-claro: #123e73;
   --azul: #1f5fa8;
   --azul-medio: #3f84ab;
@@ -109,7 +109,7 @@ blocos = '''/* Duas variações de cor. Tema escuro = fundo azul com letras bran
   --borda-forte: rgba(120, 170, 230, 0.3);
   --texto: #f1f5fb;
   --texto-suave: #a8b8cf;
-  --texto-fraco: #7388a6;
+  --texto-fraco: #8a9db8;
   --azul-claro: #9cc4f0;
   --azul: #4c8fd6;
   --gradiente-marca: linear-gradient(180deg, #ffffff 10%, #9cc4f0 55%, #5a9cc5 100%);
