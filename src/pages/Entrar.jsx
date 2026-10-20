@@ -13,6 +13,7 @@ export default function Entrar() {
   const [erro, setErro] = useState("");
   const [enviando, setEnviando] = useState(false);
   const [mostrarSenha, setMostrarSenha] = useState(false);
+  const [equipe, setEquipe] = useState(parametros.get("volta")?.startsWith("/gestor") ?? false);
   const ref = useRef(null);
 
   useEffect(() => {
@@ -74,8 +75,20 @@ export default function Entrar() {
           <Link to="/" className="entrar-logo" aria-label="Voltar ao site da F7 Engenharia Estratégica">
             <Logo />
           </Link>
-          <h1>Área do cliente</h1>
-          <p>Entre com o e-mail e a senha que a F7 enviou para você.</p>
+          <div className="entrar-abas" role="tablist" aria-label="Tipo de acesso">
+            <button type="button" role="tab" aria-selected={!equipe} className={!equipe ? "ativa" : ""} onClick={() => setEquipe(false)}>
+              Sou cliente
+            </button>
+            <button type="button" role="tab" aria-selected={equipe} className={equipe ? "ativa" : ""} onClick={() => setEquipe(true)}>
+              Equipe F7 (gestor)
+            </button>
+          </div>
+          <h1>{equipe ? "Painel do gestor" : "Área do cliente"}</h1>
+          <p>
+            {equipe
+              ? "Acesso da equipe F7: clientes, obras, documentos, contatos e acessos ao site."
+              : "Entre com o e-mail e a senha que a F7 enviou para você."}
+          </p>
 
           <form onSubmit={enviar}>
             <label className="campo">
