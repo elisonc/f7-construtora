@@ -1,0 +1,245 @@
+/* Páginas de obras, diferenciais, rodapé e seções novas da home */
+.projeto-dados {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.projeto-dados li {
+  font-size: 0.8rem;
+  padding: 0.3em 0.8em;
+  border-radius: 999px;
+  border: 1px solid var(--borda);
+  color: var(--texto-suave);
+}
+
+.projetos-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+.obras-topo {
+  padding: clamp(120px, 14vw, 170px) 0 clamp(48px, 7vw, 80px);
+  background: linear-gradient(135deg, #0a2342, #0d2f5c 60%, #0a2342);
+}
+
+.obras-topo h1 {
+  max-width: 18ch;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+}
+
+.obras-topo p {
+  max-width: 62ch;
+}
+
+.obras-abas {
+  display: flex;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.obras-abas a {
+  padding: 0.6em 1.3em;
+  border-radius: 999px;
+  border: 1px solid var(--borda-forte);
+  font-size: 0.9rem;
+  color: var(--texto-suave);
+  transition: background 0.25s, color 0.25s;
+}
+
+.obras-abas a.ativa,
+.obras-abas a:hover {
+  background: #fff;
+  color: #0a2342;
+}
+
+.grade-obras-site {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+  gap: 36px 24px;
+}
+
+.grade-obras-site .projeto {
+  flex: none;
+  color: var(--texto);
+}
+
+.grade-obras-site .projeto h3 {
+  color: var(--texto);
+}
+
+/* Diferenciais */
+.dif-secao h2 {
+  margin-bottom: 28px;
+}
+
+.dif-clara {
+  background: var(--fundo-2);
+}
+
+.dif-grade {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.dif-grade.tres {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.dif-cartao {
+  padding: 30px 28px;
+  border-radius: 20px;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+}
+
+.dif-cartao h3 {
+  font-size: 1.2rem;
+}
+
+.dif-cartao p {
+  margin: 0;
+}
+
+.dif-icone {
+  width: 48px;
+  height: 48px;
+  padding: 11px;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  background: rgba(76, 143, 214, 0.14);
+  fill: none;
+  stroke: var(--azul);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 900px) {
+  .dif-grade,
+  .dif-grade.tres {
+    grid-template-columns: 1fr;
+  }
+}
+
+.regioes-lista {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 32px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.centro .regioes-lista {
+  justify-content: center;
+}
+
+.regioes-lista li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.7em 1.4em;
+  border-radius: 999px;
+  border: 1px solid var(--borda-forte);
+  font-weight: 600;
+}
+
+.regioes-lista .dif-icone {
+  width: 28px;
+  height: 28px;
+  padding: 5px;
+  margin: 0;
+}
+
+/* Números e selos na home */
+.numeros-flat {
+  margin-bottom: clamp(56px, 8vw, 96px);
+}
+
+.selos-grade {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 36px 0;
+}
+
+.selo {
+  display: grid;
+  gap: 4px;
+  padding: 26px 22px;
+  border-radius: 18px;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+}
+
+.selo strong {
+  font-family: var(--fonte-titulo);
+  font-size: 1.1rem;
+  color: var(--azul-claro);
+}
+
+.selo span:not(.selo-marca) {
+  font-size: 0.9rem;
+  color: var(--texto-suave);
+}
+
+.selo-marca {
+  width: 34px;
+  height: 3px;
+  margin-bottom: 12px;
+  background: var(--azul);
+  border-radius: 2px;
+}
+
+@media (max-width: 900px) {
+  .selos-grade {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .selos-grade {
+    grid-template-columns: 1fr;
+  }
+}
+
+.regioes-home {
+  background: var(--fundo-2);
+}
+
+/* Rodapé novo */
+.rodape-grade {
+  grid-template-columns: 1.4fr 1.2fr 1fr 1.2fr;
+}
+
+.rodape-site {
+  display: block;
+  margin-top: 14px;
+  font-size: 0.88rem;
+  color: var(--azul-claro);
+  letter-spacing: 0.02em;
+}
+
+.rodape-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.rodape-links a:hover {
+  color: var(--texto);
+}
+
+.rodape-grade > div > a,
+.rodape-grade > div > span:not(.logo):not(.rodape-site) {
+  overflow-wrap: anywhere;
+}

@@ -1,0 +1,7 @@
+node_modules/
+dist/
+# Banco e arquivos enviados (documentos de clientes): nunca versionar.
+data/
+storage/
+producao/
+ferramentas/

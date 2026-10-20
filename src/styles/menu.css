@@ -1,0 +1,145 @@
+/* Logo com nome em duas linhas */
+.logo .logo-texto {
+  display: grid;
+  gap: 2px;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.logo .logo-texto b {
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.logo .logo-texto small {
+  font-size: 0.56rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.logo .marca-f7 {
+  width: 40px;
+}
+
+.intro-texto small {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.8rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Menu suspenso (lista para baixo) */
+.topo-nav {
+  align-items: center;
+}
+
+.suspenso {
+  position: relative;
+}
+
+.suspenso > button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 0;
+  border: 0;
+  background: none;
+  font-size: 0.92rem;
+  color: var(--texto-suave);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.suspenso > button:hover,
+.suspenso.aberto > button {
+  color: var(--texto);
+}
+
+.suspenso svg {
+  width: 10px;
+  height: 7px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  transition: transform 0.3s var(--curva);
+}
+
+.suspenso.aberto svg {
+  transform: rotate(180deg);
+}
+
+.suspenso ul {
+  position: absolute;
+  left: -16px;
+  top: 100%;
+  min-width: 280px;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  border-radius: 14px;
+  background: var(--superficie);
+  border: 1px solid var(--borda-forte);
+  box-shadow: var(--sombra);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.25s, transform 0.3s var(--curva), visibility 0.25s;
+}
+
+/* ponte invisível: o mouse não "solta" o menu no vão entre o botão e a lista */
+.suspenso ul::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -14px;
+  height: 14px;
+}
+
+.suspenso.aberto ul {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.suspenso li a {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 9px;
+  font-size: 0.9rem;
+  color: var(--texto);
+  transition: background 0.2s, color 0.2s;
+}
+
+.suspenso li a:hover,
+.suspenso li a:focus-visible {
+  background: var(--leve);
+  color: var(--azul);
+}
+
+.menu-mobile-grupo {
+  padding: 6px 0 10px;
+  border-bottom: 1px solid var(--borda);
+}
+
+.menu-mobile-grupo h3 {
+  margin: 8px 0 2px;
+  font-family: var(--fonte-texto);
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--texto-fraco);
+}
+
+.menu-mobile .menu-mobile-grupo a {
+  font-size: 1.15rem;
+  font-family: var(--fonte-texto);
+  font-weight: 500;
+  padding: 9px 0;
+  border-bottom: 0;
+}

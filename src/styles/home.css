@@ -1,0 +1,735 @@
+/* Home no estilo "vitrine": hero com slides, história, serviços, escolha,
+   projetos em carrossel e chamada final. */
+
+h2 {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: clamp(1.6rem, 3.2vw, 2.5rem);
+}
+
+.hero-slides,
+.hero-slide {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-slides {
+  top: -8%;
+  bottom: -8%;
+  will-change: transform;
+}
+
+.hero-slide {
+  opacity: 0;
+  overflow: hidden;
+  will-change: transform, opacity;
+}
+
+.hero-slide img,
+.hero-slide .skyline {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-veu {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(5, 15, 31, 0.82) 0%, rgba(5, 15, 31, 0.5) 55%, rgba(5, 15, 31, 0.25) 100%),
+    linear-gradient(180deg, rgba(5, 15, 31, 0.55), transparent 30%, rgba(5, 15, 31, 0.4));
+}
+
+.hero {
+  background: var(--preto);
+}
+
+.hero-interno {
+  display: block;
+}
+
+.hero-conteudo {
+  max-width: 760px;
+}
+
+.hero-etiqueta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--azul-claro);
+}
+
+.hero-etiqueta::before {
+  content: "";
+  width: 36px;
+  height: 1px;
+  background: currentColor;
+}
+
+.hero-titulo {
+  position: relative;
+  max-width: 17ch;
+  margin-bottom: 24px;
+  font-size: clamp(2.2rem, 5.4vw, 4.4rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1.08;
+  text-wrap: initial;
+}
+
+.hero-fantasma {
+  visibility: hidden;
+}
+
+.hero-digitado {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-digitado::after {
+  content: "";
+  display: inline-block;
+  width: 0.06em;
+  height: 0.9em;
+  margin-left: 0.08em;
+  vertical-align: -0.08em;
+  background: var(--azul-claro);
+  animation: cursor 0.9s steps(1) infinite;
+}
+
+@keyframes cursor {
+  50% {
+    opacity: 0;
+  }
+}
+
+.hero-texto {
+  max-width: 54ch;
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  color: #d3e0ea;
+  margin-bottom: 34px;
+}
+
+.hero-controles {
+  position: absolute;
+  left: 50%;
+  bottom: 30px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transform: translateX(-50%);
+}
+
+.hero-controles > button {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(5, 15, 31, 0.35);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s;
+}
+
+.hero-controles > button:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: #fff;
+}
+
+.hero-pontos {
+  display: flex;
+  gap: 8px;
+}
+
+.hero-pontos button {
+  width: 44px;
+  height: 18px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+.hero-pontos button::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 8px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.hero-pontos span {
+  position: absolute;
+  left: 0;
+  top: 8px;
+  height: 2px;
+  width: 0;
+  background: #fff;
+}
+
+.hero-pontos .ativo span {
+  width: 100%;
+  animation: preencher linear forwards;
+}
+
+@keyframes preencher {
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+.hero::after {
+  display: none;
+}
+
+/* Foto com abertura em wipe */
+.foto-caixa {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--fundo-2);
+}
+
+.foto-caixa img,
+.foto-caixa .skyline {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+/* História */
+.historia-grade {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: clamp(32px, 6vw, 90px);
+  align-items: center;
+}
+
+.historia-foto {
+  aspect-ratio: 5 / 6;
+}
+
+.historia-texto h2 {
+  margin-bottom: 24px;
+  color: var(--azul-claro);
+}
+
+.historia-texto p {
+  font-size: 1.05rem;
+}
+
+.historia-texto .botao {
+  margin-top: 12px;
+}
+
+@media (max-width: 900px) {
+  .historia-grade {
+    grid-template-columns: 1fr;
+  }
+
+  .historia-foto {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* Serviços (faixa escura) */
+.secao-escura {
+  position: relative;
+  background: var(--fundo);
+  color: var(--texto);
+}
+
+.servicos {
+  padding: clamp(60px, 8vw, 100px) 0;
+  background: linear-gradient(135deg, #0a1a33, #0e2a52 55%, #0a1a33);
+}
+
+.servicos-grade {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.servico {
+  padding: 36px 30px;
+  border-radius: 20px;
+  border: 1px solid var(--borda);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.servico-numero {
+  display: block;
+  margin-bottom: 18px;
+  font-family: var(--fonte-titulo);
+  font-weight: 300;
+  font-size: 3.2rem;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--azul);
+}
+
+.servico h3 {
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.servico p {
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .servicos-grade {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* O que faz a F7 ser a escolha certa */
+.escolha-topo {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto clamp(48px, 7vw, 90px);
+}
+
+.escolha-bloco {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(28px, 6vw, 90px);
+  align-items: center;
+  margin-bottom: clamp(56px, 8vw, 110px);
+}
+
+.escolha-bloco:last-child {
+  margin-bottom: 0;
+}
+
+.escolha-bloco.invertido .escolha-texto {
+  order: 2;
+}
+
+.escolha-foto {
+  aspect-ratio: 4 / 3;
+}
+
+.escolha-icone {
+  display: inline-grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  border: 1px solid var(--borda-forte);
+  color: var(--azul);
+}
+
+.escolha-icone svg {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.escolha-texto h3 {
+  font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--azul-claro);
+}
+
+.escolha-texto p {
+  font-size: 1.05rem;
+}
+
+@media (max-width: 900px) {
+  .escolha-bloco {
+    grid-template-columns: 1fr;
+  }
+
+  .escolha-bloco.invertido .escolha-texto {
+    order: 0;
+  }
+}
+
+/* Projetos em carrossel */
+.projetos {
+  padding: clamp(80px, 10vw, 130px) 0;
+  background: linear-gradient(180deg, #0a1c36, #0b2040);
+}
+
+.projetos-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 44px;
+}
+
+.projetos-topo > div:first-child {
+  max-width: 640px;
+}
+
+.projetos-setas {
+  display: flex;
+  gap: 10px;
+}
+
+.projetos-setas button {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid var(--borda-forte);
+  background: transparent;
+  color: var(--texto);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s;
+}
+
+.projetos-setas button:hover {
+  background: var(--leve);
+  border-color: var(--azul);
+}
+
+.projetos-trilho {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 12px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--borda-forte) transparent;
+}
+
+.projeto {
+  flex: 0 0 min(440px, 86%);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.projeto-imagem {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  margin-bottom: 22px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--fundo-2);
+}
+
+.projeto-imagem img,
+.projeto-imagem .skyline {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1s var(--curva);
+}
+
+.projeto:hover .projeto-imagem img,
+.projeto:hover .projeto-imagem .skyline {
+  transform: scale(1.07);
+}
+
+.projeto-imagem .etiqueta {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+}
+
+.projeto h3 {
+  margin-bottom: 4px;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.projeto-local {
+  margin-bottom: 10px;
+  font-size: 0.88rem;
+  color: var(--azul);
+}
+
+.projeto p {
+  margin-bottom: 20px;
+}
+
+.projeto .botao {
+  margin-top: auto;
+}
+
+.projeto.esqueleto {
+  min-height: 420px;
+  border-radius: 18px;
+  background: linear-gradient(100deg, var(--superficie) 30%, var(--superficie-2) 50%, var(--superficie) 70%);
+  background-size: 200% 100%;
+  animation: brilho 1.4s infinite linear;
+}
+
+/* Chamada final */
+.cta-faixa {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(80px, 11vw, 140px) 0;
+  text-align: center;
+  background: radial-gradient(ellipse 70% 80% at 50% 120%, rgba(31, 95, 168, 0.55), transparent 70%), #050f1f;
+  color: #f1f5fb;
+}
+
+.cta-faixa .container {
+  position: relative;
+  z-index: 1;
+}
+
+.cta-faixa h2 {
+  max-width: 20ch;
+  margin-inline: auto;
+  color: #f1f5fb;
+}
+
+.cta-faixa p {
+  color: #a8b8cf;
+  margin-bottom: 30px;
+}
+
+.cta-marca {
+  position: absolute;
+  left: 50%;
+  bottom: -2%;
+  width: min(1100px, 130%);
+  transform: translateX(-50%);
+  opacity: 0.1;
+}
+
+.contato {
+  background: var(--fundo-2);
+}
+
+/* Imagens do site (painel do gestor) */
+.grade-imagens {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+  gap: 16px;
+}
+
+.cartao-imagem {
+  display: grid;
+  gap: 6px;
+  padding: 14px;
+  border-radius: var(--raio);
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+}
+
+.cartao-imagem-previa {
+  aspect-ratio: 16 / 10;
+  margin-bottom: 6px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.cartao-imagem-previa img,
+.cartao-imagem-previa .skyline {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cartao-imagem span {
+  font-size: 0.82rem;
+  color: var(--texto-fraco);
+}
+
+.cartao-imagem .tabela-acoes {
+  justify-content: flex-start;
+  margin-top: 6px;
+}
+
+/* Área do cliente: capa com a cena da obra e documentos em cartões com imagem */
+.conta-resumo {
+  position: relative;
+  overflow: hidden;
+  min-height: 300px;
+  color: var(--texto);
+  background: #050f1f;
+}
+
+.conta-capa {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.conta-capa-veu {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(5, 15, 31, 0.9), rgba(5, 15, 31, 0.55) 60%, rgba(5, 15, 31, 0.35));
+}
+
+.conta-resumo-texto,
+.conta-resumo-anel {
+  position: relative;
+  z-index: 1;
+}
+
+.documentos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+  gap: 18px;
+}
+
+.doc-cartao {
+  position: relative;
+  overflow: hidden;
+  min-height: 420px;
+  border-radius: 18px;
+  border: 1px solid var(--borda);
+  background: #050f1f;
+  color: var(--texto);
+}
+
+.doc-cartao > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s var(--curva);
+}
+
+.doc-cartao:hover > img {
+  transform: scale(1.08);
+}
+
+.doc-veu {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(5, 15, 31, 0.35), rgba(5, 15, 31, 0.82));
+}
+
+.doc-conteudo {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 10px;
+  min-height: 420px;
+  padding: 28px 20px;
+  text-align: center;
+}
+
+.doc-marca {
+  width: 64px;
+  margin: 0 auto 4px;
+}
+
+.doc-conteudo h3 {
+  margin-bottom: 14px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.doc-botao {
+  display: grid;
+  gap: 2px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--btn-bg);
+  color: var(--btn-texto);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: transform 0.3s var(--curva), box-shadow 0.3s;
+}
+
+.doc-botao small {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  opacity: 0.7;
+  overflow-wrap: anywhere;
+}
+
+.doc-botao:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -14px rgba(76, 143, 214, 0.8);
+}
+
+.rodape-animacao {
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+/* Logo com nome em duas linhas */
+.logo .logo-texto {
+  display: grid;
+  gap: 2px;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.logo .logo-texto b {
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.logo .logo-texto small {
+  font-size: 0.56rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.logo .marca-f7 {
+  width: 40px;
+}
+
+.intro-texto small {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.8rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  font-weight: 600;
+}

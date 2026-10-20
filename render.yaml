@@ -1,0 +1,18 @@
+# Blueprint do Render (https://render.com): cria o site com disco persistente.
+# Plano "starter" é o mínimo que aceita disco (o banco e os arquivos dos clientes precisam dele).
+services:
+  - type: web
+    name: f7-engenharia-estrategica
+    runtime: docker
+    plan: starter
+    region: oregon
+    healthCheckPath: /api/auth/eu
+    envVars:
+      - key: F7_EMAIL_GESTOR
+        value: gestor@f7engenhariaestrategica.com.br
+      - key: F7_SENHA_GESTOR
+        sync: false # você digita no painel do Render; nunca fica no código
+    disk:
+      name: dados-f7
+      mountPath: /data
+      sizeGB: 2

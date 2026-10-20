@@ -1,0 +1,32 @@
+{
+  "name": "f7-construtora",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site da F7 Construtora: site público, área do cliente e painel do gestor.",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "vite build",
+    "start": "node server.js --prod",
+    "seed": "node server/seed.js --reset",
+    "conteudo": "node server/conteudo.js"
+  },
+  "engines": {
+    "node": ">=22.13"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource-variable/montserrat": "^5.3.0",
+    "@gsap/react": "^2.1.2",
+    "gsap": "^3.15.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router": "^8.4.0",
+    "three": "^0.134.0",
+    "vanta": "^0.5.24"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.2",
+    "vite": "^8.3.4"
+  }
+}
