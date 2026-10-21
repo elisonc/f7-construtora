@@ -122,7 +122,7 @@ export default function Header() {
     <header className={`topo${rolado || !temHero ? " rolado" : ""}${escondido && !menuAberto ? " escondido" : ""}`}>
       <div className="topo-interno">
         <Link to="/" className="topo-logo" aria-label="F7 Engenharia Estratégica, página inicial">
-          <Logo />
+          <Logo contraste={true} />
         </Link>
         <nav className="topo-nav" aria-label="Principal">
           {MENU.map((item) =>
