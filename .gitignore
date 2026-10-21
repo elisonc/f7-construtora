@@ -1,7 +1,11 @@
 node_modules/
 dist/
-# Banco e arquivos enviados (documentos de clientes): nunca versionar.
-data/
-storage/
+.env
+.env.local
+
+# Pasta de produção local (contém credenciais e logs)
 producao/
-ferramentas/
+
+# Arquivos temporários do SQLite WAL
+*.db-shm
+*.db-wal

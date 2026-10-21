@@ -111,6 +111,19 @@
   border-bottom: 1px solid var(--borda);
 }
 
+.conta-topo .logo-svg {
+  height: 36px;
+  width: auto;
+  color: var(--texto);
+}
+
+.conta-topo .logo-img {
+  height: 36px;
+  max-width: 160px;
+  object-fit: contain;
+  filter: none;
+}
+
 .conta-topo-interno {
   height: 70px;
   display: flex;
@@ -299,6 +312,7 @@ button.galeria-item:hover img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+  filter: saturate(1.25) brightness(1.06);
 }
 
 .galeria-item > span,
@@ -319,6 +333,70 @@ button.galeria-item:hover img {
 
 .galeria-gestor .galeria-item {
   cursor: default;
+}
+
+.galeria-video video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+/* ---------- Financeiro (área do cliente) ---------- */
+
+.financeiro-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
+  gap: 14px;
+}
+
+.financeiro-card {
+  background: var(--fundo-2);
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.financeiro-card span {
+  font-size: 0.82rem;
+  color: var(--texto-suave);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.financeiro-card strong {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--texto);
+  line-height: 1.2;
+}
+
+.financeiro-card-destaque {
+  border-color: var(--azul);
+  background: color-mix(in srgb, var(--azul) 8%, var(--fundo-2));
+}
+
+.financeiro-card-destaque strong {
+  color: var(--azul);
+  font-size: 1.8rem;
+}
+
+.financeiro-card .barra {
+  height: 6px;
+  background: var(--borda);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.financeiro-card .barra i {
+  display: block;
+  height: 100%;
+  background: var(--azul);
+  border-radius: 99px;
+  transition: width 0.8s var(--curva);
 }
 
 .documentos {
@@ -549,6 +627,19 @@ button.galeria-item:hover img {
 
 .gestor-logo {
   padding: 4px 8px;
+}
+
+.gestor-logo .logo-svg {
+  height: 36px;
+  width: auto;
+  color: var(--texto);
+}
+
+.gestor-logo .logo-img {
+  height: 36px;
+  max-width: 160px;
+  object-fit: contain;
+  filter: none;
 }
 
 .gestor-logo .marca-f7 {

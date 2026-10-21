@@ -1,9 +1,59 @@
 import { useImagens } from "../lib/imagens.jsx";
 
-// Marca da F7 Engenharia Estratégica: só tipografia. As letras "F" e "7" se encontram na barra
-// superior (como uma ligatura) e o nome completo vai pequeno, ao lado, em duas linhas.
-// As cores vêm de variáveis (--marca-*), então mudam junto com o tema Vinho / Verde Musgo.
-// As classes f7-barra (cada letra) são usadas nas animações de abertura.
+/* SVG da marca F7 — sem dependência de imagem externa.
+   A badge (fundo navy) e as letras brancas são sempre visíveis em qualquer fundo escuro.
+   O texto "ENGENHARIA / ESTRATÉGICA" usa currentColor, então muda junto com a cor do contexto. */
+export function LogoSVG({ className = "" }) {
+  return (
+    <svg
+      className={`logo-svg ${className}`}
+      viewBox="0 0 320 72"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      focusable="false"
+    >
+      {/* Badge navy */}
+      <rect x="0" y="0" width="72" height="72" rx="13" fill="#1B2F50" />
+
+      {/* F — barra vertical */}
+      <rect x="13" y="12" width="10" height="48" fill="white" />
+      {/* F — barra do topo */}
+      <rect x="13" y="12" width="36" height="10" fill="white" />
+      {/* F — barra do meio */}
+      <rect x="13" y="32" width="28" height="9" fill="white" />
+
+      {/* 7 — barra do topo */}
+      <rect x="35" y="12" width="24" height="10" fill="white" />
+      {/* 7 — diagonal */}
+      <polygon points="59,12 59,22 47,60 37,60 49,22 49,12" fill="white" />
+
+      {/* Texto direito — usa currentColor para adaptar ao contexto */}
+      <text
+        x="84"
+        y="33"
+        fontFamily="'Montserrat','Segoe UI','Arial',sans-serif"
+        fontSize="19"
+        fontWeight="700"
+        letterSpacing="2"
+        fill="currentColor"
+      >
+        ENGENHARIA
+      </text>
+      <text
+        x="84"
+        y="60"
+        fontFamily="'Montserrat','Segoe UI','Arial',sans-serif"
+        fontSize="19"
+        fontWeight="700"
+        letterSpacing="2"
+        fill="currentColor"
+      >
+        ESTRATÉGICA
+      </text>
+    </svg>
+  );
+}
+
 export function MarcaF7({ className = "", titulo }) {
   return (
     <span
@@ -18,10 +68,27 @@ export function MarcaF7({ className = "", titulo }) {
   );
 }
 
-export default function Logo({ className = "" }) {
+export default function Logo({ className = "", contraste = false }) {
   const imagens = useImagens();
-  const logoUrl = imagens?.logo;
 
+  if (contraste) {
+    // Header escuro: usar logo-contraste se disponível, senão SVG (sempre visível)
+    const urlContraste = imagens?.["logo-contraste"];
+    if (urlContraste) {
+      return (
+        <span className={`logo logo-personalizada logo-contraste ${className}`}>
+          <img src={urlContraste} alt="F7 Engenharia Estratégica" className="logo-img" />
+        </span>
+      );
+    }
+    return (
+      <span className={`logo ${className}`} aria-label="F7 Engenharia Estratégica">
+        <LogoSVG />
+      </span>
+    );
+  }
+
+  const logoUrl = imagens?.logo;
   if (logoUrl) {
     return (
       <span className={`logo logo-personalizada ${className}`}>
@@ -31,12 +98,8 @@ export default function Logo({ className = "" }) {
   }
 
   return (
-    <span className={`logo ${className}`}>
-      <MarcaF7 />
-      <span className="logo-sub">
-        <span>Engenharia</span>
-        <span>Estratégica</span>
-      </span>
+    <span className={`logo ${className}`} aria-label="F7 Engenharia Estratégica">
+      <LogoSVG />
     </span>
   );
 }

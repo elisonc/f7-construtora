@@ -194,7 +194,7 @@ export default function ObraEditar() {
   return (
     <div className="pagina-gestor">
       <Link to="/gestor/obras" className="voltar">
-        ← Todas as obras
+        ← Todas as construções
       </Link>
       <div className="pagina-gestor-topo">
         <div>
@@ -207,7 +207,7 @@ export default function ObraEditar() {
       </div>
 
       <form className="painel-cartao" onSubmit={salvar} onChange={() => setAlterado(true)}>
-        <h2>Dados da obra</h2>
+        <h2>Dados da construção</h2>
         <CamposObra key={obra.atualizado_em} obra={obra} clientes={clientes} />
 
         <h2 className="subtitulo-cartao">Etapas</h2>
@@ -229,28 +229,32 @@ export default function ObraEditar() {
 
       <section className="painel-cartao">
         <div className="painel-cartao-topo">
-          <h2>Fotos ({obra.fotos.length})</h2>
+          <h2>Fotos e vídeos ({obra.fotos.length})</h2>
           {envio && <span className="contagem">{envio}</span>}
         </div>
         <div className="envio">
           <input
-            placeholder="Legenda (opcional, vale para as fotos deste envio)"
+            placeholder="Legenda (opcional, vale para os arquivos deste envio)"
             value={legenda}
             maxLength={140}
             onChange={(e) => setLegenda(e.target.value)}
-            aria-label="Legenda das fotos"
+            aria-label="Legenda das fotos/vídeos"
           />
           <label className={`botao botao-contorno${envio ? " desativado" : ""}`}>
-            Escolher fotos
-            <input type="file" accept="image/jpeg,image/png,image/webp" multiple hidden disabled={Boolean(envio)} onChange={enviarFotos} />
+            Escolher fotos/vídeos
+            <input type="file" accept="image/jpeg,image/png,image/webp,video/mp4,video/quicktime,.mov,.mp4" multiple hidden disabled={Boolean(envio)} onChange={enviarFotos} />
           </label>
         </div>
-        <p className="form-nota">JPG, PNG ou WebP. Fotos grandes são reduzidas automaticamente antes do envio.</p>
+        <p className="form-nota">Fotos: JPG, PNG ou WebP (reduzidas automaticamente). Vídeos: MP4 ou MOV (até 200 MB).</p>
         {obra.fotos.length ? (
           <div className="galeria galeria-gestor">
             {obra.fotos.map((f) => (
               <figure key={f.id} className="galeria-item">
-                <img src={f.url} alt={f.legenda || "Foto da obra"} loading="lazy" />
+                {f.mime?.startsWith("video/") ? (
+                  <video src={f.url} controls preload="metadata" />
+                ) : (
+                  <img src={f.url} alt={f.legenda || "Foto da construção"} loading="lazy" />
+                )}
                 <figcaption>
                   <span>
                     {f.legenda || "Sem legenda"}
@@ -259,7 +263,7 @@ export default function ObraEditar() {
                   <BotaoConfirmar
                     className="botao botao-fantasma botao-pequeno"
                     confirmar="Excluir?"
-                    aoConfirmar={() => excluir(`/api/gestor/fotos/${f.id}`, "Foto excluída.")}
+                    aoConfirmar={() => excluir(`/api/gestor/fotos/${f.id}`, "Arquivo excluído.")}
                   >
                     Excluir
                   </BotaoConfirmar>
@@ -268,7 +272,7 @@ export default function ObraEditar() {
             ))}
           </div>
         ) : (
-          <p className="vazio-pequeno">Nenhuma foto enviada ainda.</p>
+          <p className="vazio-pequeno">Nenhuma foto ou vídeo enviado ainda.</p>
         )}
       </section>
 

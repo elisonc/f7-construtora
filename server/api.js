@@ -27,7 +27,7 @@ import {
   usuarioDaSessao,
   exigirUsuario,
 } from "./auth.js";
-import { detectarTipo, salvar, apagar, enviarArquivo, nomeSeguro, IMAGENS, DOCUMENTOS } from "./arquivos.js";
+import { detectarTipo, salvar, apagar, enviarArquivo, nomeSeguro, IMAGENS, MIDIA, DOCUMENTOS } from "./arquivos.js";
 
 const STATUS_OBRA = ["planejamento", "em_andamento", "pausada", "concluida"];
 const STATUS_EMPREENDIMENTO = ["lancamento", "em_obras", "entregue"];
@@ -99,7 +99,7 @@ function detalharObra(obra) {
     ...obra,
     etapas: db.prepare("SELECT id, nome, percentual FROM etapas WHERE obra_id = ? ORDER BY ordem").all(obra.id),
     fotos: db
-      .prepare("SELECT id, legenda, criado_em FROM fotos WHERE obra_id = ? ORDER BY id DESC")
+      .prepare("SELECT id, mime, legenda, criado_em FROM fotos WHERE obra_id = ? ORDER BY id DESC")
       .all(obra.id)
       .map((f) => ({ ...f, url: `/api/fotos/${f.id}` })),
     documentos: db
@@ -237,7 +237,8 @@ rota("POST", "/api/metricas/visita", async ({ req, res }) => {
 });
 
 const SLOTS_IMAGEM = {
-  logo: "Logomarca (PNG com fundo transparente, ou JPG)",
+  logo: "Logomarca (versão normal — fundo branco ou transparente)",
+  "logo-contraste": "Logomarca contraste (versão branca para fundo escuro)",
   "hero-1": "Slide 1 do topo",
   "hero-2": "Slide 2 do topo",
   "hero-3": "Slide 3 do topo",
@@ -352,7 +353,8 @@ function arquivoPermitido(req, tabela, id) {
 
 rota("GET", "/api/fotos/:id", ({ req, res, params }) => {
   const foto = arquivoPermitido(req, "fotos", params.id);
-  enviarArquivo(res, "fotos", foto.arquivo, { mime: foto.mime, cache: "private, max-age=3600" });
+  const pasta = foto.mime?.startsWith("video/") ? "videos" : "fotos";
+  enviarArquivo(res, pasta, foto.arquivo, { mime: foto.mime, cache: "private, max-age=3600" });
 });
 
 rota("GET", "/api/documentos/:id", ({ req, res, params }) => {
@@ -579,9 +581,12 @@ rota("PUT", "/api/gestor/obras/:id", async ({ req, res, params }) => {
   const atual = obraDoGestor(params.id);
   const dados = await lerJson(req);
   const o = dadosObra(dados, atual);
+  const parsarMoeda = (v) => v === undefined || v === null || v === "" ? null : (Number(String(v).replace(/[^\d]/g, "")) || null);
+  const orcado = dados.orcado === undefined ? atual.orcado : parsarMoeda(dados.orcado);
+  const gasto = dados.gasto === undefined ? atual.gasto : parsarMoeda(dados.gasto);
   db.prepare(
-    "UPDATE obras SET nome = ?, cliente_id = ?, endereco = ?, status = ?, previsao_entrega = ?, atualizado_em = datetime('now') WHERE id = ?"
-  ).run(o.nome, o.cliente_id, o.endereco, o.status, o.previsao_entrega, atual.id);
+    "UPDATE obras SET nome = ?, cliente_id = ?, endereco = ?, status = ?, previsao_entrega = ?, orcado = ?, gasto = ?, atualizado_em = datetime('now') WHERE id = ?"
+  ).run(o.nome, o.cliente_id, o.endereco, o.status, o.previsao_entrega, orcado, gasto, atual.id);
   if (Array.isArray(dados.etapas)) {
     const etapas = dados.etapas
       .slice(0, 30)
@@ -616,9 +621,11 @@ rota("DELETE", "/api/gestor/obras/:id", ({ req, res, params }) => {
 rota("POST", "/api/gestor/obras/:id/fotos", async ({ req, res, params }) => {
   exigirUsuario(req, "gestor");
   const obra = obraDoGestor(params.id);
-  const corpo = await lerCorpo(req, 12 * MB);
-  const tipo = detectarTipo(corpo, IMAGENS);
-  const arquivo = salvar("fotos", corpo, tipo.ext);
+  const limite = 200 * MB;
+  const corpo = await lerCorpo(req, limite);
+  const tipo = detectarTipo(corpo, MIDIA);
+  const pasta = tipo.mime.startsWith("video/") ? "videos" : "fotos";
+  const arquivo = salvar(pasta, corpo, tipo.ext);
   const legenda = nomeSeguro(req.headers["x-legenda"], "").slice(0, 140) || null;
   const { lastInsertRowid } = db
     .prepare("INSERT INTO fotos (obra_id, arquivo, mime, legenda) VALUES (?, ?, ?, ?)")
@@ -712,11 +719,16 @@ rota("PUT", "/api/gestor/empreendimentos/:id", async ({ req, res, params }) => {
 
 rota("PUT", "/api/gestor/empreendimentos/:id/andamento", async ({ req, res, params }) => {
   exigirUsuario(req, "gestor");
-  const { percentual } = await lerJson(req);
-  const valor = percentual === null || percentual === "" ? null : inteiro(percentual, 0, 100);
-  const { changes } = db.prepare("UPDATE empreendimentos SET percentual = ? WHERE id = ?").run(valor, idNumero(params.id));
+  const dados = await lerJson(req);
+  const percentual = dados.percentual === null || dados.percentual === "" ? null : inteiro(dados.percentual, 0, 100);
+  const parsarMoeda2 = (v) => v === null || v === "" ? null : (Number(String(v).replace(/[^\d]/g, "")) || null);
+  const orcado = parsarMoeda2(dados.orcado ?? null);
+  const gasto = parsarMoeda2(dados.gasto ?? null);
+  const { changes } = db
+    .prepare("UPDATE empreendimentos SET percentual = ?, orcado = ?, gasto = ? WHERE id = ?")
+    .run(percentual, orcado, gasto, idNumero(params.id));
   if (!changes) throw new ErroHttp(404, "Empreendimento não encontrado.");
-  json(res, 200, { percentual: valor });
+  json(res, 200, { percentual, orcado, gasto });
 });
 
 rota("DELETE", "/api/gestor/empreendimentos/:id", ({ req, res, params }) => {

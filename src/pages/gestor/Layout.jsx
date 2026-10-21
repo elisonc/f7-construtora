@@ -20,7 +20,7 @@ const ICONES = {
 const MENU = [
   { para: "/gestor", texto: "Dashboard", icone: "painel", fim: true },
   { para: "/gestor/clientes", texto: "Clientes", icone: "clientes" },
-  { para: "/gestor/obras", texto: "Obras", icone: "obras" },
+  { para: "/gestor/obras", texto: "Construções", icone: "obras" },
   { para: "/gestor/empreendimentos", texto: "Obras do site", icone: "empreendimentos" },
   { para: "/gestor/contatos", texto: "Contatos", icone: "contatos" },
   { para: "/gestor/imagens", texto: "Imagens do site", icone: "imagens" },

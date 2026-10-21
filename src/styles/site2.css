@@ -355,6 +355,42 @@
   cursor: pointer;
 }
 
+.financeiro-campos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.campo-pequeno span {
+  font-size: 0.72rem;
+}
+
+.campo-pequeno input {
+  padding: 6px 8px;
+  font-size: 0.9rem;
+}
+
+.financeiro-resumo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  padding: 8px 10px;
+  background: var(--fundo-alt);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: var(--texto-fraco);
+}
+
+.financeiro-resumo strong {
+  color: var(--texto);
+}
+
+.pct-gasto {
+  font-weight: 700;
+  color: var(--azul);
+}
+
 .projeto-andamento {
   width: 100%;
   margin: 0 0 16px;

@@ -143,31 +143,51 @@ function FormEmpreendimento({ item, aoSalvar }) {
   );
 }
 
-// Barra de andamento da obra com ajuste na hora (salva ao soltar o controle).
+const BRL = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
+
+// Painel de andamento + dados financeiros. Salva ao soltar o controle ou ao sair do campo.
 function Andamento({ item, aoSalvar }) {
   const avisar = useAviso();
   const [valor, setValor] = useState(item.percentual ?? 0);
-  useEffect(() => setValor(item.percentual ?? 0), [item.percentual]);
+  const [orcado, setOrcado] = useState(item.orcado ?? "");
+  const [gasto, setGasto] = useState(item.gasto ?? "");
+  const [salvando, setSalvando] = useState(false);
+  useEffect(() => {
+    setValor(item.percentual ?? 0);
+    setOrcado(item.orcado ?? "");
+    setGasto(item.gasto ?? "");
+  }, [item.percentual, item.orcado, item.gasto]);
 
   if (item.status !== "em_obras") {
     return <div className="andamento andamento-fim">{item.status === "entregue" ? "Obra concluída" : ""}</div>;
   }
 
-  async function salvar(novo) {
+  async function salvar(novos = {}) {
+    setSalvando(true);
     try {
-      await api(`/api/gestor/empreendimentos/${item.id}/andamento`, { metodo: "PUT", dados: { percentual: novo } });
-      aoSalvar(novo);
-      avisar(`${item.nome}: ${novo}% concluído. O site já mostra.`);
+      const percentualEnviar = novos.percentual !== undefined ? novos.percentual : valor;
+      const orcadoEnviar = novos.orcado !== undefined ? novos.orcado : orcado;
+      const gastoEnviar = novos.gasto !== undefined ? novos.gasto : gasto;
+      const resp = await api(`/api/gestor/empreendimentos/${item.id}/andamento`, {
+        metodo: "PUT",
+        dados: { percentual: percentualEnviar, orcado: orcadoEnviar || null, gasto: gastoEnviar || null },
+      });
+      aoSalvar(resp);
+      avisar(`${item.nome}: dados financeiros salvos.`);
     } catch (falha) {
       avisar(falha.message, "erro");
+    } finally {
+      setSalvando(false);
     }
   }
+
+  const pctGasto = item.orcado && item.gasto ? Math.round((item.gasto / item.orcado) * 100) : null;
 
   return (
     <div className="andamento">
       <div className="andamento-topo">
-        <span>Andamento da obra</span>
-        <strong>{item.percentual == null ? "não informado" : `${valor}%`}</strong>
+        <span>Execução física</span>
+        <strong>{item.percentual == null ? "—" : `${valor}%`}</strong>
       </div>
       <div className="barra">
         <i style={{ width: `${item.percentual == null ? 0 : valor}%` }} />
@@ -180,10 +200,45 @@ function Andamento({ item, aoSalvar }) {
         value={valor}
         aria-label={`Andamento de ${item.nome}`}
         onChange={(ev) => setValor(Number(ev.target.value))}
-        onMouseUp={() => salvar(valor)}
-        onTouchEnd={() => salvar(valor)}
-        onKeyUp={(ev) => ["ArrowLeft", "ArrowRight", "Home", "End"].includes(ev.key) && salvar(valor)}
+        onMouseUp={() => salvar({ percentual: valor })}
+        onTouchEnd={() => salvar({ percentual: valor })}
+        onKeyUp={(ev) => ["ArrowLeft", "ArrowRight", "Home", "End"].includes(ev.key) && salvar({ percentual: valor })}
       />
+      <div className="financeiro-campos">
+        <label className="campo campo-pequeno">
+          <span>Valor orçado (R$)</span>
+          <input
+            type="number"
+            min={0}
+            step={1000}
+            placeholder="0"
+            value={orcado}
+            onChange={(ev) => setOrcado(ev.target.value)}
+            onBlur={() => salvar()}
+            disabled={salvando}
+          />
+        </label>
+        <label className="campo campo-pequeno">
+          <span>Gasto até agora (R$)</span>
+          <input
+            type="number"
+            min={0}
+            step={1000}
+            placeholder="0"
+            value={gasto}
+            onChange={(ev) => setGasto(ev.target.value)}
+            onBlur={() => salvar()}
+            disabled={salvando}
+          />
+        </label>
+      </div>
+      {(item.orcado || item.gasto) && (
+        <div className="financeiro-resumo">
+          {item.orcado && <span>Orçado: <strong>{BRL.format(item.orcado)}</strong></span>}
+          {item.gasto && <span>Gasto: <strong>{BRL.format(item.gasto)}</strong></span>}
+          {pctGasto !== null && <span className="pct-gasto">{pctGasto}% do orçamento</span>}
+        </div>
+      )}
     </div>
   );
 }
@@ -241,7 +296,7 @@ export default function GestorEmpreendimentos() {
                 <strong>{e.nome}</strong>
                 <span>{e.local || "Sem localização"}</span>
               </div>
-              <Andamento item={e} aoSalvar={(valor) => setLista((l) => l.map((x) => (x.id === e.id ? { ...x, percentual: valor } : x)))} />
+              <Andamento item={e} aoSalvar={(resp) => setLista((l) => l.map((x) => (x.id === e.id ? { ...x, ...resp } : x)))} />
               <div className="linha-emp-etiquetas">
                 <span className={`etiqueta etiqueta-${e.status}`}>{STATUS_EMPREENDIMENTO[e.status]}</span>
                 {!e.publicado && <span className="etiqueta etiqueta-pausada">Oculto</span>}

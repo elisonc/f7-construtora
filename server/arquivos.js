@@ -19,9 +19,26 @@ const ASSINATURAS = [
     confere: (b) => b.subarray(0, 4).toString("latin1") === "RIFF" && b.subarray(8, 12).toString("latin1") === "WEBP",
   },
   { mime: "application/pdf", ext: "pdf", confere: (b) => b.subarray(0, 5).toString("latin1") === "%PDF-" },
+  {
+    mime: "video/mp4",
+    ext: "mp4",
+    confere: (b) => {
+      const ftyp = b.subarray(4, 8).toString("latin1");
+      return ftyp === "ftyp" || ftyp === "moov" || b.subarray(4, 12).toString("latin1") === "ftypmp4" ||
+        ["isom", "mp42", "mp41", "avc1", "M4V ", "M4A "].some((s) => b.subarray(8, 12).toString("latin1") === s);
+    },
+  },
+  {
+    mime: "video/quicktime",
+    ext: "mov",
+    confere: (b) => b.subarray(4, 8).toString("latin1") === "ftyp" &&
+      b.subarray(8, 12).toString("latin1") === "qt  ",
+  },
 ];
 
 export const IMAGENS = ["image/jpeg", "image/png", "image/webp"];
+export const VIDEOS = ["video/mp4", "video/quicktime"];
+export const MIDIA = [...IMAGENS, ...VIDEOS];
 export const DOCUMENTOS = ["application/pdf", "image/jpeg", "image/png"];
 
 export function detectarTipo(buffer, permitidos) {

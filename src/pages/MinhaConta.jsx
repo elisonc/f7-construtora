@@ -4,6 +4,8 @@ import { api } from "../lib/api.js";
 import { useAuth } from "../lib/auth.jsx";
 import { gsap, useGSAP, reduzirMovimento } from "../lib/gsap.js";
 import { STATUS_OBRA, bytes, data, mesAno, primeiroNome, relativo } from "../lib/formato.js";
+
+const BRL = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
 import { empresa, linkWhatsApp, digitos } from "../config.js";
 import Logo from "../components/Logo.jsx";
 import TemaBotao from "../components/TemaBotao.jsx";
@@ -38,7 +40,7 @@ export default function MinhaConta() {
   const ref = useRef(null);
 
   useEffect(() => {
-    document.title = "Minha obra — F7 Engenharia Estratégica";
+    document.title = "Minha construção — F7 Engenharia Estratégica";
     api("/api/cliente/obras")
       .then(setObras)
       .catch((falha) => setErro(falha.message));
@@ -112,8 +114,8 @@ export default function MinhaConta() {
 
         {obras && !obras.length && (
           <section className="conta-bloco conta-vazio">
-            <h1>Sua obra ainda não foi cadastrada</h1>
-            <p>Assim que a equipe F7 registrar sua obra, ela aparece aqui com etapas, fotos e documentos.</p>
+            <h1>Sua construção ainda não foi cadastrada</h1>
+            <p>Assim que a equipe F7 registrar sua construção, ela aparece aqui com etapas, fotos e documentos.</p>
             {linkWhatsApp() && (
               <a className="botao botao-primario" href={linkWhatsApp("Olá! Ainda não vejo minha obra na área do cliente.")}>
                 Falar com a F7
@@ -123,7 +125,7 @@ export default function MinhaConta() {
         )}
 
         {obras?.length > 1 && (
-          <div className="seletor-obras" role="tablist" aria-label="Suas obras">
+          <div className="seletor-obras" role="tablist" aria-label="Suas construções">
             {obras.map((o, i) => (
               <button
                 key={o.id}
@@ -166,7 +168,7 @@ export default function MinhaConta() {
 
             <div className="conta-grade">
               <section className="conta-bloco">
-                <h2>Etapas da obra</h2>
+                <h2>Etapas da construção</h2>
                 <ol className="etapas">
                   {obra.etapas.map((e) => (
                     <li key={e.id} className={e.percentual === 100 ? "completa" : ""}>
@@ -182,13 +184,42 @@ export default function MinhaConta() {
                 </ol>
               </section>
 
+              {(obra.orcado || obra.gasto) && (
+                <section className="conta-bloco conta-financeiro">
+                  <h2>Dados financeiros</h2>
+                  <div className="financeiro-grid">
+                    {obra.orcado && (
+                      <div className="financeiro-card">
+                        <span>Valor total orçado</span>
+                        <strong>{BRL.format(obra.orcado)}</strong>
+                      </div>
+                    )}
+                    {obra.gasto && (
+                      <div className="financeiro-card">
+                        <span>Gasto até agora</span>
+                        <strong>{BRL.format(obra.gasto)}</strong>
+                      </div>
+                    )}
+                    {obra.orcado && obra.gasto && (
+                      <div className="financeiro-card financeiro-card-destaque">
+                        <span>% do orçamento utilizado</span>
+                        <strong>{Math.round((obra.gasto / obra.orcado) * 100)}%</strong>
+                        <div className="barra" style={{ marginTop: 8 }}>
+                          <i style={{ width: `${Math.min(100, Math.round((obra.gasto / obra.orcado) * 100))}%` }} />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </section>
+              )}
+
               <section className="conta-bloco conta-contato">
                 <h2>Fale com a equipe</h2>
-                <p>Dúvidas sobre a obra? Fale direto com quem está cuidando dela.</p>
+                <p>Dúvidas sobre a construção? Fale direto com quem está cuidando dela.</p>
                 {linkWhatsApp() && (
                   <a
                     className="botao botao-primario botao-bloco"
-                    href={linkWhatsApp(`Olá! Sou ${usuario.nome}, cliente da obra "${obra.nome}".`)}
+                    href={linkWhatsApp(`Olá! Sou ${usuario.nome}, cliente da construção "${obra.nome}".`)}
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -220,23 +251,33 @@ export default function MinhaConta() {
 
             <section className="conta-bloco">
               <div className="bloco-topo">
-                <h2>Fotos da obra</h2>
-                {total > 0 && <span className="contagem">{total} foto(s)</span>}
+                <h2>Fotos e vídeos</h2>
+                {total > 0 && <span className="contagem">{total} arquivo(s)</span>}
               </div>
               {total ? (
                 <div className="galeria">
                   {obra.fotos.map((f, i) => (
+                    f.mime?.startsWith("video/") ? (
+                      <div key={f.id} className="galeria-item galeria-video">
+                        <video src={f.url} controls preload="metadata" />
+                        <span>
+                          {f.legenda || "Vídeo da construção"}
+                          <small>{data(f.criado_em)}</small>
+                        </span>
+                      </div>
+                    ) : (
                     <button key={f.id} type="button" className="galeria-item" onClick={() => setFoto(i)}>
-                      <img src={f.url} alt={f.legenda || "Foto da obra"} loading="lazy" />
+                      <img src={f.url} alt={f.legenda || "Foto da construção"} loading="lazy" />
                       <span>
-                        {f.legenda || "Foto da obra"}
+                        {f.legenda || "Foto da construção"}
                         <small>{data(f.criado_em)}</small>
                       </span>
                     </button>
+                    )
                   ))}
                 </div>
               ) : (
-                <p className="vazio-pequeno">As fotos aparecem aqui assim que a equipe enviar.</p>
+                <p className="vazio-pequeno">As fotos e vídeos aparecem aqui assim que a equipe enviar.</p>
               )}
             </section>
 
@@ -267,7 +308,7 @@ export default function MinhaConta() {
                   ))}
                 </div>
               ) : (
-                <p className="vazio-pequeno">Os documentos da obra aparecem aqui quando forem enviados.</p>
+                <p className="vazio-pequeno">Os documentos da construção aparecem aqui quando forem enviados.</p>
               )}
             </section>
           </>

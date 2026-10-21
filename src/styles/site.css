@@ -50,9 +50,64 @@
 }
 
 .topo.rolado {
-  background: var(--vidro);
+  background: rgba(14, 27, 50, 0.97);
   backdrop-filter: blur(14px) saturate(140%);
-  border-bottom-color: var(--borda);
+  border-bottom-color: rgba(255,255,255,0.08);
+}
+
+/* Logo SVG: texto fica branco no header (sempre fundo escuro) */
+.topo .logo-svg {
+  color: white;
+}
+
+/* Links e botão de contorno ficam brancos no header rolado */
+.topo.rolado .topo-nav a,
+.topo.rolado .suspenso button {
+  color: rgba(255,255,255,0.82);
+}
+.topo.rolado .topo-nav a:hover,
+.topo.rolado .suspenso button:hover {
+  color: #fff;
+}
+.topo.rolado .topo-nav a::after {
+  background: #fff;
+}
+.topo.rolado .topo-acoes .botao-contorno {
+  color: #fff;
+  border-color: rgba(255,255,255,0.4);
+}
+.topo.rolado .topo-acoes .botao-contorno:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.65);
+}
+.topo.rolado .hamburguer span {
+  background: #fff;
+}
+.topo.rolado .hamburguer {
+  border-color: rgba(255,255,255,0.3);
+}
+
+/* Header transparente sobre hero: forçar texto branco para contraste */
+.topo:not(.rolado) .topo-nav a,
+.topo:not(.rolado) .suspenso button {
+  color: rgba(255,255,255,0.88);
+}
+.topo:not(.rolado) .topo-nav a:hover,
+.topo:not(.rolado) .suspenso button:hover {
+  color: #fff;
+}
+.topo:not(.rolado) .topo-nav a::after {
+  background: #fff;
+}
+.topo:not(.rolado) .topo-acoes .botao-contorno {
+  color: #fff;
+  border-color: rgba(255,255,255,0.55);
+}
+.topo:not(.rolado) .hamburguer span {
+  background: #fff;
+}
+.topo:not(.rolado) .hamburguer {
+  border-color: rgba(255,255,255,0.4);
 }
 
 .topo.escondido {
@@ -73,6 +128,20 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
+}
+
+/* Logo SVG no header */
+.topo .logo-svg {
+  height: 44px;
+  width: auto;
+}
+
+/* Logo PNG no header */
+.topo .logo-img {
+  height: 40px;
+  width: auto;
+  max-width: 200px;
+  object-fit: contain;
 }
 
 .logo .marca-f7 {

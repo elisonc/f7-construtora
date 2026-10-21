@@ -10,6 +10,7 @@ export const PASTA_DADOS = path.join(BASE, "data");
 export const PASTA_ARQUIVOS = path.join(BASE, "storage");
 export const PASTAS = {
   fotos: path.join(PASTA_ARQUIVOS, "fotos"),
+  videos: path.join(PASTA_ARQUIVOS, "videos"),
   documentos: path.join(PASTA_ARQUIVOS, "documentos"),
   capas: path.join(PASTA_ARQUIVOS, "capas"),
 };
@@ -148,9 +149,17 @@ db.exec(`
 `);
 
 // Colunas acrescentadas depois da primeira versão (bancos antigos são atualizados aqui).
-for (const [coluna, tipo] of [["unidades", "TEXT"], ["entrega", "TEXT"], ["endereco", "TEXT"], ["percentual", "INTEGER"]]) {
+for (const [coluna, tipo] of [["unidades", "TEXT"], ["entrega", "TEXT"], ["endereco", "TEXT"], ["percentual", "INTEGER"], ["orcado", "REAL"], ["gasto", "REAL"]]) {
   try {
     db.exec(`ALTER TABLE empreendimentos ADD COLUMN ${coluna} ${tipo}`);
+  } catch {
+    /* já existe */
+  }
+}
+
+for (const [coluna, tipo] of [["orcado", "REAL"], ["gasto", "REAL"]]) {
+  try {
+    db.exec(`ALTER TABLE obras ADD COLUMN ${coluna} ${tipo}`);
   } catch {
     /* já existe */
   }

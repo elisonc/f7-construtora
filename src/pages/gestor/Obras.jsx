@@ -6,6 +6,37 @@ import { useAviso } from "../../components/Toast.jsx";
 import Modal from "../../components/Modal.jsx";
 import Carregando from "../../components/Carregando.jsx";
 
+const BRL = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
+
+function parseMoeda(txt) {
+  const num = Number(String(txt).replace(/[^\d]/g, ""));
+  return isNaN(num) || num === 0 ? "" : String(num);
+}
+
+function formatarMoeda(txt) {
+  const num = Number(String(txt).replace(/[^\d]/g, ""));
+  return num > 0 ? BRL.format(num) : "";
+}
+
+function CampoMoeda({ nome, rotulo, valor }) {
+  const [display, setDisplay] = useState(valor ? BRL.format(valor) : "");
+  return (
+    <label className="campo">
+      <span>{rotulo}</span>
+      <input
+        type="text"
+        inputMode="numeric"
+        name={nome}
+        value={display}
+        placeholder="R$ 0"
+        onChange={(e) => setDisplay(e.target.value)}
+        onBlur={(e) => setDisplay(formatarMoeda(e.target.value))}
+        onFocus={(e) => setDisplay(parseMoeda(e.target.value))}
+      />
+    </label>
+  );
+}
+
 export function CamposObra({ obra, clientes }) {
   return (
     <>
@@ -23,7 +54,7 @@ export function CamposObra({ obra, clientes }) {
         </select>
       </label>
       <label className="campo">
-        <span>Nome da obra</span>
+        <span>Nome da construção</span>
         <input name="nome" defaultValue={obra?.nome} required maxLength={120} placeholder="Ex.: Casa Lote 12 — Residencial X" />
       </label>
       <label className="campo">
@@ -45,6 +76,10 @@ export function CamposObra({ obra, clientes }) {
             ))}
           </select>
         </label>
+      </div>
+      <div className="campos-linha">
+        <CampoMoeda nome="orcado" rotulo="Valor total orçado (R$)" valor={obra?.orcado} />
+        <CampoMoeda nome="gasto" rotulo="Valor gasto até agora (R$)" valor={obra?.gasto} />
       </div>
     </>
   );
@@ -72,7 +107,7 @@ function NovaObra({ clientes, clientePadrao, aoCriar }) {
   if (!clientes.length) {
     return (
       <div>
-        <p>Cadastre o cliente antes de criar a obra.</p>
+        <p>Cadastre o cliente antes de criar a construção.</p>
         <Link to="/gestor/clientes?novo=1" className="botao botao-primario">
           Cadastrar cliente
         </Link>
@@ -83,7 +118,7 @@ function NovaObra({ clientes, clientePadrao, aoCriar }) {
   return (
     <form onSubmit={enviar}>
       <CamposObra obra={clientePadrao ? { cliente_id: Number(clientePadrao) } : null} clientes={clientes} />
-      <p className="form-nota">A obra começa com as etapas padrão (fundação, estrutura…). Você ajusta depois.</p>
+      <p className="form-nota">A construção começa com as etapas padrão (fundação, estrutura…). Você ajusta depois.</p>
       {erro && (
         <p className="form-erro" role="alert">
           {erro}
@@ -91,7 +126,7 @@ function NovaObra({ clientes, clientePadrao, aoCriar }) {
       )}
       <div className="modal-acoes">
         <button type="submit" className="botao botao-primario" disabled={enviando}>
-          {enviando ? "Criando…" : "Criar obra"}
+          {enviando ? "Criando…" : "Criar construção"}
         </button>
       </div>
     </form>
@@ -108,7 +143,7 @@ export default function Obras() {
   const [novaAberta, setNovaAberta] = useState(Boolean(parametros.get("novo")));
 
   useEffect(() => {
-    document.title = "Obras — Painel F7";
+    document.title = "Construções — Painel F7";
     api("/api/gestor/obras")
       .then(setObras)
       .catch((falha) => avisar(falha.message, "erro"));
@@ -133,18 +168,18 @@ export default function Obras() {
     <div className="pagina-gestor">
       <div className="pagina-gestor-topo">
         <div>
-          <h1>Obras</h1>
+          <h1>Construções</h1>
           <p>Atualize etapas, fotos e documentos. O cliente vê tudo na hora.</p>
         </div>
         <button type="button" className="botao botao-primario botao-pequeno" onClick={() => setNovaAberta(true)}>
-          + Nova obra
+          + Nova construção
         </button>
       </div>
 
       <div className="barra-ferramentas">
         <input
           type="search"
-          placeholder="Buscar por obra ou cliente"
+          placeholder="Buscar por construção ou cliente"
           value={busca}
           onChange={(e) => setBusca(e.target.value)}
           aria-label="Buscar obras"

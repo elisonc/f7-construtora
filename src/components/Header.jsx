@@ -11,7 +11,7 @@ import { linkWhatsApp } from "../config.js";
 const MENU = [
   { texto: "Quem somos", para: "/#sobre" },
   {
-    texto: "Obras",
+    texto: "Construções",
     sub: [
       { texto: "Em andamento", para: "/obras/andamento" },
       { texto: "Concluídas", para: "/obras/concluidas" },
@@ -116,13 +116,13 @@ export default function Header() {
   const p = local.pathname;
   const temHero = p === "/" || p.startsWith("/obras/") || p === "/diferenciais" || p.startsWith("/empreendimentos/");
   const destinoArea = usuario ? inicioDoPapel(usuario.papel) : "/entrar";
-  const textoArea = usuario ? (usuario.papel === "gestor" ? "Painel do gestor" : "Minha obra") : "Área do cliente";
+  const textoArea = usuario ? (usuario.papel === "gestor" ? "Painel do gestor" : "Minha construção") : "Área do cliente";
 
   return (
     <header className={`topo${rolado || !temHero ? " rolado" : ""}${escondido && !menuAberto ? " escondido" : ""}`}>
       <div className="topo-interno">
         <Link to="/" className="topo-logo" aria-label="F7 Engenharia Estratégica, página inicial">
-          <Logo />
+          <Logo contraste={true} />
         </Link>
         <nav className="topo-nav" aria-label="Principal">
           {MENU.map((item) =>
