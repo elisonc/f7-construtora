@@ -1,0 +1,15 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "{data/f7.db,storage/**}",
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "/api/index" },
+    { "source": "/arquivos/:path*", "destination": "/api/index" },
+    { "source": "/((?!assets/).*)", "destination": "/index.html" }
+  ]
+}
