@@ -1442,11 +1442,14 @@
 }
 
 /* Logo branca: PNG colorida invertida sobre fundos escuros */
-.logo-branca .logo-img {
-  filter: brightness(0) invert(1);
+.logo-tema-escuro {
+  display: none !important;
 }
-[data-theme="dark"] .logo-auto-tema .logo-img {
-  filter: brightness(0) invert(1);
+[data-theme="dark"] .logo-auto-tema .logo-tema-claro {
+  display: none !important;
+}
+[data-theme="dark"] .logo-auto-tema .logo-tema-escuro {
+  display: block !important;
 }
 .rodape .logo-img {
   height: 52px;

@@ -2,6 +2,7 @@ import { useImagens } from "../lib/imagens.jsx";
 
 // Caminho da logo padrão no public/ (sempre disponível)
 const LOGO_PADRAO = "/logo-f7.png";
+const LOGO_BRANCA = "/logo-f7-branca.png";
 
 /* SVG da marca F7 — fallback quando não há PNG disponível. */
 export function LogoSVG({ className = "" }) {
@@ -65,7 +66,7 @@ function useLogo(onde) {
   const base = imagens?.logo || LOGO_PADRAO;
   if (ESCURO.has(onde)) {
     const contraste = imagens?.["logo-contraste"];
-    return contraste ? { src: contraste, classe: "" } : { src: base, classe: " logo-branca" };
+    return contraste ? { src: contraste, classe: "" } : { src: LOGO_BRANCA, classe: "" };
   }
   if (onde === "gestor") return { src: base, classe: " logo-auto-tema" };
   return { src: base, classe: "" };
@@ -87,6 +88,14 @@ export function MarcaF7({ className = "", titulo }) {
 
 export default function Logo({ className = "", onde = "padrao" }) {
   const { src, classe } = useLogo(onde);
+  if (classe === " logo-auto-tema") {
+    return (
+      <span className={`logo logo-personalizada${classe} ${className}`}>
+        <img src={src} alt="F7 Engenharia Estratégica" className="logo-img logo-tema-claro" />
+        <img src={LOGO_BRANCA} alt="" aria-hidden="true" className="logo-img logo-tema-escuro" />
+      </span>
+    );
+  }
   return (
     <span className={`logo logo-personalizada${classe} ${className}`}>
       <img src={src} alt="F7 Engenharia Estratégica" className="logo-img" />
