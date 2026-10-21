@@ -237,10 +237,11 @@ rota("POST", "/api/metricas/visita", async ({ req, res }) => {
 });
 
 const SLOTS_IMAGEM = {
+  logo: "Logomarca (PNG com fundo transparente, ou JPG)",
   "hero-1": "Slide 1 do topo",
   "hero-2": "Slide 2 do topo",
   "hero-3": "Slide 3 do topo",
-  historia: "Seção A história",
+  historia: "Seção Quem somos",
   "dif-1": "Destaque 1 (transparência)",
   "dif-2": "Destaque 2 (projetos modernos)",
   "dif-3": "Destaque 3 (qualidade)",

@@ -1,3 +1,5 @@
+import { useImagens } from "../lib/imagens.jsx";
+
 // Marca da F7 Engenharia Estratégica: só tipografia. As letras "F" e "7" se encontram na barra
 // superior (como uma ligatura) e o nome completo vai pequeno, ao lado, em duas linhas.
 // As cores vêm de variáveis (--marca-*), então mudam junto com o tema Vinho / Verde Musgo.
@@ -17,6 +19,17 @@ export function MarcaF7({ className = "", titulo }) {
 }
 
 export default function Logo({ className = "" }) {
+  const imagens = useImagens();
+  const logoUrl = imagens?.logo;
+
+  if (logoUrl) {
+    return (
+      <span className={`logo logo-personalizada ${className}`}>
+        <img src={logoUrl} alt="F7 Engenharia Estratégica" className="logo-img" />
+      </span>
+    );
+  }
+
   return (
     <span className={`logo ${className}`}>
       <MarcaF7 />
