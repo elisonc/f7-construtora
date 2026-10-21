@@ -144,10 +144,6 @@
   object-fit: contain;
 }
 
-/* Logo contraste no header escuro: inverte para branco (PNG transparente) */
-.topo .logo-contraste .logo-img {
-  filter: brightness(0) invert(1);
-}
 
 .logo .marca-f7 {
   width: 54px;
