@@ -1,8 +1,9 @@
 import { useImagens } from "../lib/imagens.jsx";
 
-/* SVG da marca F7 — sem dependência de imagem externa.
-   A badge (fundo navy) e as letras brancas são sempre visíveis em qualquer fundo escuro.
-   O texto "ENGENHARIA / ESTRATÉGICA" usa currentColor, então muda junto com a cor do contexto. */
+// Caminho da logo padrão no public/ (sempre disponível)
+const LOGO_PADRAO = "/logo-f7.png";
+
+/* SVG da marca F7 — fallback quando não há PNG disponível. */
 export function LogoSVG({ className = "" }) {
   return (
     <svg
@@ -71,35 +72,13 @@ export function MarcaF7({ className = "", titulo }) {
 export default function Logo({ className = "", contraste = false }) {
   const imagens = useImagens();
 
-  if (contraste) {
-    // Header escuro: usar logo-contraste se disponível, senão SVG (sempre visível)
-    const urlContraste = imagens?.["logo-contraste"];
-    if (urlContraste) {
-      return (
-        <span className={`logo logo-personalizada logo-contraste ${className}`}>
-          <img src={urlContraste} alt="F7 Engenharia Estratégica" className="logo-img" />
-        </span>
-      );
-    }
-    return (
-      <span className={`logo ${className}`} aria-label="F7 Engenharia Estratégica">
-        <LogoSVG />
-      </span>
-    );
-  }
-
-  const logoUrl = imagens?.logo;
-  if (logoUrl) {
-    return (
-      <span className={`logo logo-personalizada ${className}`}>
-        <img src={logoUrl} alt="F7 Engenharia Estratégica" className="logo-img" />
-      </span>
-    );
-  }
+  // API já retorna a URL completa; fallback = public/logo-f7.png
+  const slot = contraste ? "logo-contraste" : "logo";
+  const src = imagens?.[slot] || imagens?.logo || LOGO_PADRAO;
 
   return (
-    <span className={`logo ${className}`} aria-label="F7 Engenharia Estratégica">
-      <LogoSVG />
+    <span className={`logo logo-personalizada${contraste ? " logo-contraste" : ""} ${className}`}>
+      <img src={src} alt="F7 Engenharia Estratégica" className="logo-img" />
     </span>
   );
 }

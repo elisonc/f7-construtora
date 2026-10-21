@@ -120,6 +120,14 @@ function semearProducao() {
   const senha = process.env.F7_SENHA_GESTOR || crypto.randomBytes(9).toString("base64url");
   inserirUsuario({ nome: "Gestor F7", email, senha }, "gestor");
   carregarConteudo(); // obras reais da F7, editáveis no painel
+  // Slot de logo padrão (PNG com fundo transparente, copiado de public/)
+  const logoFile = "logo-f7.png";
+  const src = path.join(import.meta.dirname, "..", "public", logoFile);
+  const dest = path.join(PASTAS.capas, logoFile);
+  if (fs.existsSync(src)) fs.copyFileSync(src, dest);
+  const insSlot = db.prepare("INSERT OR IGNORE INTO site_imagens(slot, arquivo) VALUES(?,?)");
+  insSlot.run("logo", logoFile);
+  insSlot.run("logo-contraste", logoFile);
   if (!process.env.F7_SENHA_GESTOR) {
     console.log(`\n[F7] Gestor criado: ${email}\n[F7] Senha inicial (anote, não aparece de novo): ${senha}\n`);
   }

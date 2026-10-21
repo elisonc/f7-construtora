@@ -144,6 +144,11 @@
   object-fit: contain;
 }
 
+/* Header no topo escuro (hero): inverte logo para branco */
+.topo:not(.rolado) .logo-contraste .logo-img {
+  filter: brightness(0) invert(1);
+}
+
 
 .logo .marca-f7 {
   width: 54px;

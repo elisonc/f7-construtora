@@ -19,7 +19,8 @@ function formatarMoeda(txt) {
 }
 
 function CampoMoeda({ nome, rotulo, valor }) {
-  const [display, setDisplay] = useState(valor ? BRL.format(valor) : "");
+  const [num, setNum] = useState(valor ? String(Math.round(valor)) : "");
+  const display = num ? BRL.format(Number(num)) : "";
   return (
     <label className="campo">
       <span>{rotulo}</span>
@@ -29,9 +30,10 @@ function CampoMoeda({ nome, rotulo, valor }) {
         name={nome}
         value={display}
         placeholder="R$ 0"
-        onChange={(e) => setDisplay(e.target.value)}
-        onBlur={(e) => setDisplay(formatarMoeda(e.target.value))}
-        onFocus={(e) => setDisplay(parseMoeda(e.target.value))}
+        onChange={(e) => {
+          const digits = e.target.value.replace(/[^\d]/g, "");
+          setNum(digits || "");
+        }}
       />
     </label>
   );
