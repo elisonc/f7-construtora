@@ -148,10 +148,6 @@
   object-fit: contain;
 }
 
-/* Header no topo escuro (hero): inverte logo para branco */
-.topo:not(.rolado) .logo-contraste .logo-img {
-  filter: brightness(0) invert(1);
-}
 
 
 .logo .marca-f7 {
@@ -1445,25 +1441,32 @@
   margin: 0 auto 24px;
 }
 
-/* Logo branca (rodapé e fundos escuros) */
-.logo-branca .logo-img,
-.logo-branca-img {
+/* Logo branca: PNG colorida invertida sobre fundos escuros */
+.logo-branca .logo-img {
   filter: brightness(0) invert(1);
 }
-.logo-branca .logo-img {
-  height: 48px;
-  width: auto;
+[data-theme="dark"] .logo-auto-tema .logo-img {
+  filter: brightness(0) invert(1);
+}
+.rodape .logo-img {
+  height: 52px;
+  max-width: 260px;
 }
 .marca-f7-logo {
   display: inline-block;
   line-height: 0;
 }
-.marca-f7-logo .logo-branca-img {
-  display: block;
-  width: min(320px, 70vw);
+.marca-f7-logo .logo-img {
   height: auto;
+  width: min(320px, 70vw);
+  max-width: none;
 }
-.marca-f7-logo.doc-marca .logo-branca-img {
-  width: 120px;
-  filter: none;
+.doc-marca .logo-img {
+  width: 110px;
+}
+.nao-encontrado-marca .logo-img {
+  width: 200px;
+}
+.cta-marca .logo-img {
+  width: 100%;
 }

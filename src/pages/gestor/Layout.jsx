@@ -51,7 +51,7 @@ export default function LayoutGestor() {
     <div className="gestor">
       <aside className="gestor-lateral">
         <Link to="/gestor" className="gestor-logo" aria-label="Início do painel">
-          <Logo />
+          <Logo onde="gestor" />
         </Link>
         <nav aria-label="Painel do gestor">
           {MENU.map((item) => (

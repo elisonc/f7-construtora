@@ -236,9 +236,17 @@ rota("POST", "/api/metricas/visita", async ({ req, res }) => {
   res.writeHead(204).end();
 });
 
+function arquivoEmUso(arquivo, exceto) {
+  return Boolean(db.prepare("SELECT 1 FROM site_imagens WHERE arquivo = ? AND slot != ?").get(arquivo, exceto ?? ""));
+}
+
 const SLOTS_IMAGEM = {
-  logo: "Logomarca (versão normal — fundo branco ou transparente)",
-  "logo-contraste": "Logomarca contraste (versão branca para fundo escuro)",
+  "logo-menu": "Logo do menu (topo do site)",
+  "logo-rodape": "Logo do rodapé",
+  "logo-entrada": "Logo da entrada do site (abertura e tela de login)",
+  "logo-gestor": "Logo da área do gestor",
+  logo: "Logo padrão (fundo claro: área do cliente, login)",
+  "logo-contraste": "Logo de contraste (branca, para fundos escuros)",
   "hero-1": "Slide 1 do topo",
   "hero-2": "Slide 2 do topo",
   "hero-3": "Slide 3 do topo",
@@ -274,7 +282,7 @@ rota("POST", "/api/gestor/site/imagens/:slot", async ({ req, res, params }) => {
   const arquivo = salvar("capas", corpo, tipo.ext);
   const antigo = db.prepare("SELECT arquivo FROM site_imagens WHERE slot = ?").get(params.slot);
   db.prepare("INSERT INTO site_imagens (slot, arquivo) VALUES (?, ?) ON CONFLICT(slot) DO UPDATE SET arquivo = excluded.arquivo").run(params.slot, arquivo);
-  if (antigo) apagar("capas", antigo.arquivo);
+  if (antigo && !arquivoEmUso(antigo.arquivo, params.slot)) apagar("capas", antigo.arquivo);
   json(res, 200, { url: `/arquivos/capas/${arquivo}` });
 });
 
@@ -283,7 +291,7 @@ rota("DELETE", "/api/gestor/site/imagens/:slot", ({ req, res, params }) => {
   const antigo = db.prepare("SELECT arquivo FROM site_imagens WHERE slot = ?").get(params.slot);
   if (antigo) {
     db.prepare("DELETE FROM site_imagens WHERE slot = ?").run(params.slot);
-    apagar("capas", antigo.arquivo);
+    if (!arquivoEmUso(antigo.arquivo)) apagar("capas", antigo.arquivo);
   }
   json(res, 200, { ok: true });
 });

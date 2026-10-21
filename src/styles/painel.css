@@ -1773,3 +1773,13 @@ button.galeria-item:hover img {
     display: none;
   }
 }
+
+.titulo-secao-gestor {
+  font-size: 1.15rem;
+  margin: 28px 0 6px;
+}
+.texto-ajuda-gestor {
+  margin: 0 0 14px;
+  color: var(--texto-suave, inherit);
+  opacity: 0.8;
+}

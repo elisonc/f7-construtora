@@ -10,15 +10,8 @@ export default function Intro({ aoTerminar }) {
     () => {
       gsap
         .timeline({ onComplete: aoTerminar })
-        .from(".f7-barra", {
-          scaleY: 0,
-          transformOrigin: "50% 100%",
-          stagger: { each: 0.045, from: "center" },
-          duration: 0.75,
-          ease: "power4.out",
-        })
-        .from(".f7-arco", { scaleX: 0, transformOrigin: "50% 50%", opacity: 0, duration: 0.6 }, "-=0.55")
-        .from(".intro-texto", { opacity: 0, y: 16, letterSpacing: "0.5em", duration: 0.7 }, "-=0.35")
+        .from(".intro-marca", { opacity: 0, scale: 0.9, y: 20, duration: 0.8, ease: "power4.out" })
+        .from(".intro-texto", { opacity: 0, y: 16, duration: 0.6 }, "-=0.3")
         .to(".intro-conteudo", { y: -30, opacity: 0, duration: 0.45, ease: "power2.in" }, "+=0.35")
         .to(ref.current, { yPercent: -100, duration: 0.85, ease: "power4.inOut" }, "-=0.15");
     },
@@ -29,10 +22,6 @@ export default function Intro({ aoTerminar }) {
     <div ref={ref} className="intro" aria-hidden="true">
       <div className="intro-conteudo">
         <MarcaF7 className="intro-marca" />
-        <div className="intro-texto">
-          
-          <small>Engenharia Estratégica</small>
-        </div>
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ export default function RodapeF7() {
     <footer className="rodape">
       <div className="container rodape-grade">
         <div>
-          <Logo branca />
+          <Logo onde="rodape" />
 {empresa.site && <span className="rodape-site">{empresa.site}</span>}
         </div>
         <div>

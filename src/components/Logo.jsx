@@ -55,28 +55,40 @@ export function LogoSVG({ className = "" }) {
   );
 }
 
+// onde: menu | rodape | entrada (fundos escuros), gestor (segue o tema), padrao (fundo claro).
+const ESCURO = new Set(["menu", "rodape", "entrada"]);
+
+function useLogo(onde) {
+  const imagens = useImagens();
+  const propria = imagens?.[`logo-${onde}`];
+  if (propria) return { src: propria, classe: "" };
+  const base = imagens?.logo || LOGO_PADRAO;
+  if (ESCURO.has(onde)) {
+    const contraste = imagens?.["logo-contraste"];
+    return contraste ? { src: contraste, classe: "" } : { src: base, classe: " logo-branca" };
+  }
+  if (onde === "gestor") return { src: base, classe: " logo-auto-tema" };
+  return { src: base, classe: "" };
+}
+
 export function MarcaF7({ className = "", titulo }) {
+  const { src, classe } = useLogo("entrada");
   return (
     <span
-      className={`marca-f7-logo ${className}`}
+      className={`marca-f7-logo${classe} ${className}`}
       role={titulo ? "img" : undefined}
       aria-label={titulo}
       aria-hidden={titulo ? undefined : true}
     >
-      <img src={LOGO_PADRAO} alt="" className="logo-branca-img" />
+      <img src={src} alt="" className="logo-img" />
     </span>
   );
 }
 
-export default function Logo({ className = "", contraste = false, branca = false }) {
-  const imagens = useImagens();
-
-  // API já retorna a URL completa; fallback = public/logo-f7.png
-  const slot = contraste ? "logo-contraste" : "logo";
-  const src = imagens?.[slot] || imagens?.logo || LOGO_PADRAO;
-
+export default function Logo({ className = "", onde = "padrao" }) {
+  const { src, classe } = useLogo(onde);
   return (
-    <span className={`logo logo-personalizada${contraste ? " logo-contraste" : ""}${branca ? " logo-branca" : ""} ${className}`}>
+    <span className={`logo logo-personalizada${classe} ${className}`}>
       <img src={src} alt="F7 Engenharia Estratégica" className="logo-img" />
     </span>
   );
