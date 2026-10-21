@@ -100,7 +100,7 @@ servidor.on("request", async (req, res) => {
     if (url.pathname.startsWith("/api/")) return await tratarApi(req, res, url, PRODUCAO);
 
     // Capas de empreendimentos são públicas (aparecem no site).
-    const capa = url.pathname.match(/^\/arquivos\/capas\/([a-f0-9-]+(?:-m)?\.(?:jpg|png|webp))$/);
+    const capa = url.pathname.match(/^\/arquivos\/capas\/([A-Za-z0-9_-]+(?:-m)?\.(?:jpg|png|webp))$/);
     if (capa) {
       const mime = { jpg: "image/jpeg", png: "image/png", webp: "image/webp" }[capa[1].split(".").pop()];
       return enviarArquivo(res, "capas", capa[1], { mime, cache: "public, max-age=604800" });
