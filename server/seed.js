@@ -153,7 +153,7 @@ function semearDesenvolvimento() {
     ["Estrutura em concreto", "obra-estrutura"],
     ["Guindaste na obra", "guindastes"],
     ["Alvenaria e telhado", "casa-obra"],
-    ["Torres em construção", "predio-obra"],
+    ["Torres em obra", "predio-obra"],
     ["Acabamento da fachada", "predio-pronto"],
   ];
   const inserirFoto = db.prepare("INSERT INTO fotos (obra_id, arquivo, mime, legenda) VALUES (?, ?, 'image/jpeg', ?)");

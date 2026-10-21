@@ -56,7 +56,7 @@ export function CamposObra({ obra, clientes }) {
         </select>
       </label>
       <label className="campo">
-        <span>Nome da construção</span>
+        <span>Nome da obra</span>
         <input name="nome" defaultValue={obra?.nome} required maxLength={120} placeholder="Ex.: Casa Lote 12 — Residencial X" />
       </label>
       <label className="campo">
@@ -109,7 +109,7 @@ function NovaObra({ clientes, clientePadrao, aoCriar }) {
   if (!clientes.length) {
     return (
       <div>
-        <p>Cadastre o cliente antes de criar a construção.</p>
+        <p>Cadastre o cliente antes de criar a obra.</p>
         <Link to="/gestor/clientes?novo=1" className="botao botao-primario">
           Cadastrar cliente
         </Link>
@@ -120,7 +120,7 @@ function NovaObra({ clientes, clientePadrao, aoCriar }) {
   return (
     <form onSubmit={enviar}>
       <CamposObra obra={clientePadrao ? { cliente_id: Number(clientePadrao) } : null} clientes={clientes} />
-      <p className="form-nota">A construção começa com as etapas padrão (fundação, estrutura…). Você ajusta depois.</p>
+      <p className="form-nota">A obra começa com as etapas padrão (fundação, estrutura…). Você ajusta depois.</p>
       {erro && (
         <p className="form-erro" role="alert">
           {erro}
@@ -128,7 +128,7 @@ function NovaObra({ clientes, clientePadrao, aoCriar }) {
       )}
       <div className="modal-acoes">
         <button type="submit" className="botao botao-primario" disabled={enviando}>
-          {enviando ? "Criando…" : "Criar construção"}
+          {enviando ? "Criando…" : "Criar obra"}
         </button>
       </div>
     </form>
@@ -174,14 +174,14 @@ export default function Obras() {
           <p>Atualize etapas, fotos e documentos. O cliente vê tudo na hora.</p>
         </div>
         <button type="button" className="botao botao-primario botao-pequeno" onClick={() => setNovaAberta(true)}>
-          + Nova construção
+          + Nova obra
         </button>
       </div>
 
       <div className="barra-ferramentas">
         <input
           type="search"
-          placeholder="Buscar por construção ou cliente"
+          placeholder="Buscar por obra ou cliente"
           value={busca}
           onChange={(e) => setBusca(e.target.value)}
           aria-label="Buscar obras"

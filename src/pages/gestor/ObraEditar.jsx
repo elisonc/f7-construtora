@@ -207,7 +207,7 @@ export default function ObraEditar() {
       </div>
 
       <form className="painel-cartao" onSubmit={salvar} onChange={() => setAlterado(true)}>
-        <h2>Dados da construção</h2>
+        <h2>Dados da obra</h2>
         <CamposObra key={obra.atualizado_em} obra={obra} clientes={clientes} />
 
         <h2 className="subtitulo-cartao">Etapas</h2>
@@ -253,7 +253,7 @@ export default function ObraEditar() {
                 {f.mime?.startsWith("video/") ? (
                   <video src={f.url} controls preload="metadata" />
                 ) : (
-                  <img src={f.url} alt={f.legenda || "Foto da construção"} loading="lazy" />
+                  <img src={f.url} alt={f.legenda || "Foto da obra"} loading="lazy" />
                 )}
                 <figcaption>
                   <span>

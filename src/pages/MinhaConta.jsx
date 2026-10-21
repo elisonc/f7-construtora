@@ -40,7 +40,7 @@ export default function MinhaConta() {
   const ref = useRef(null);
 
   useEffect(() => {
-    document.title = "Minha construção — F7 Engenharia Estratégica";
+    document.title = "Minha obra — F7 Engenharia Estratégica";
     api("/api/cliente/obras")
       .then(setObras)
       .catch((falha) => setErro(falha.message));
@@ -114,8 +114,8 @@ export default function MinhaConta() {
 
         {obras && !obras.length && (
           <section className="conta-bloco conta-vazio">
-            <h1>Sua construção ainda não foi cadastrada</h1>
-            <p>Assim que a equipe F7 registrar sua construção, ela aparece aqui com etapas, fotos e documentos.</p>
+            <h1>Sua obra ainda não foi cadastrada</h1>
+            <p>Assim que a equipe F7 registrar sua obra, ela aparece aqui com etapas, fotos e documentos.</p>
             {linkWhatsApp() && (
               <a className="botao botao-primario" href={linkWhatsApp("Olá! Ainda não vejo minha obra na área do cliente.")}>
                 Falar com a F7
@@ -168,7 +168,7 @@ export default function MinhaConta() {
 
             <div className="conta-grade">
               <section className="conta-bloco">
-                <h2>Etapas da construção</h2>
+                <h2>Etapas da obra</h2>
                 <ol className="etapas">
                   {obra.etapas.map((e) => (
                     <li key={e.id} className={e.percentual === 100 ? "completa" : ""}>
@@ -215,11 +215,11 @@ export default function MinhaConta() {
 
               <section className="conta-bloco conta-contato">
                 <h2>Fale com a equipe</h2>
-                <p>Dúvidas sobre a construção? Fale direto com quem está cuidando dela.</p>
+                <p>Dúvidas sobre a obra? Fale direto com quem está cuidando dela.</p>
                 {linkWhatsApp() && (
                   <a
                     className="botao botao-primario botao-bloco"
-                    href={linkWhatsApp(`Olá! Sou ${usuario.nome}, cliente da construção "${obra.nome}".`)}
+                    href={linkWhatsApp(`Olá! Sou ${usuario.nome}, cliente da obra "${obra.nome}".`)}
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -261,15 +261,15 @@ export default function MinhaConta() {
                       <div key={f.id} className="galeria-item galeria-video">
                         <video src={f.url} controls preload="metadata" />
                         <span>
-                          {f.legenda || "Vídeo da construção"}
+                          {f.legenda || "Vídeo da obra"}
                           <small>{data(f.criado_em)}</small>
                         </span>
                       </div>
                     ) : (
                     <button key={f.id} type="button" className="galeria-item" onClick={() => setFoto(i)}>
-                      <img src={f.url} alt={f.legenda || "Foto da construção"} loading="lazy" />
+                      <img src={f.url} alt={f.legenda || "Foto da obra"} loading="lazy" />
                       <span>
-                        {f.legenda || "Foto da construção"}
+                        {f.legenda || "Foto da obra"}
                         <small>{data(f.criado_em)}</small>
                       </span>
                     </button>
@@ -308,7 +308,7 @@ export default function MinhaConta() {
                   ))}
                 </div>
               ) : (
-                <p className="vazio-pequeno">Os documentos da construção aparecem aqui quando forem enviados.</p>
+                <p className="vazio-pequeno">Os documentos da obra aparecem aqui quando forem enviados.</p>
               )}
             </section>
           </>

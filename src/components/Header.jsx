@@ -116,7 +116,7 @@ export default function Header() {
   const p = local.pathname;
   const temHero = p === "/" || p.startsWith("/obras/") || p === "/diferenciais" || p.startsWith("/empreendimentos/");
   const destinoArea = usuario ? inicioDoPapel(usuario.papel) : "/entrar";
-  const textoArea = usuario ? (usuario.papel === "gestor" ? "Painel do gestor" : "Minha construção") : "Área do cliente";
+  const textoArea = usuario ? (usuario.papel === "gestor" ? "Painel do gestor" : "Minha obra") : "Área do cliente";
 
   return (
     <header className={`topo${rolado || !temHero ? " rolado" : ""}${escondido && !menuAberto ? " escondido" : ""}`}>
