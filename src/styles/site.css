@@ -1444,3 +1444,26 @@
   width: 160px;
   margin: 0 auto 24px;
 }
+
+/* Logo branca (rodapé e fundos escuros) */
+.logo-branca .logo-img,
+.logo-branca-img {
+  filter: brightness(0) invert(1);
+}
+.logo-branca .logo-img {
+  height: 48px;
+  width: auto;
+}
+.marca-f7-logo {
+  display: inline-block;
+  line-height: 0;
+}
+.marca-f7-logo .logo-branca-img {
+  display: block;
+  width: min(320px, 70vw);
+  height: auto;
+}
+.marca-f7-logo.doc-marca .logo-branca-img {
+  width: 120px;
+  filter: none;
+}

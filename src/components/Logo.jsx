@@ -58,18 +58,17 @@ export function LogoSVG({ className = "" }) {
 export function MarcaF7({ className = "", titulo }) {
   return (
     <span
-      className={`marca-f7 ${className}`}
+      className={`marca-f7-logo ${className}`}
       role={titulo ? "img" : undefined}
       aria-label={titulo}
       aria-hidden={titulo ? undefined : true}
     >
-      <i className="f7-barra">F</i>
-      <i className="f7-barra">7</i>
+      <img src={LOGO_PADRAO} alt="" className="logo-branca-img" />
     </span>
   );
 }
 
-export default function Logo({ className = "", contraste = false }) {
+export default function Logo({ className = "", contraste = false, branca = false }) {
   const imagens = useImagens();
 
   // API já retorna a URL completa; fallback = public/logo-f7.png
@@ -77,7 +76,7 @@ export default function Logo({ className = "", contraste = false }) {
   const src = imagens?.[slot] || imagens?.logo || LOGO_PADRAO;
 
   return (
-    <span className={`logo logo-personalizada${contraste ? " logo-contraste" : ""} ${className}`}>
+    <span className={`logo logo-personalizada${contraste ? " logo-contraste" : ""}${branca ? " logo-branca" : ""} ${className}`}>
       <img src={src} alt="F7 Engenharia Estratégica" className="logo-img" />
     </span>
   );

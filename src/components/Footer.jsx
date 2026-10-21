@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="rodape">
       <div className="container rodape-grade">
         <div>
-          <Logo />
+          <Logo branca />
           <p className="rodape-slogan">{empresa.slogan}</p>
         </div>
         <div>
