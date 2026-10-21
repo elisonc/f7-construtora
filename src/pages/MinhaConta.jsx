@@ -125,7 +125,7 @@ export default function MinhaConta() {
         )}
 
         {obras?.length > 1 && (
-          <div className="seletor-obras" role="tablist" aria-label="Suas construções">
+          <div className="seletor-obras" role="tablist" aria-label="Suas obras">
             {obras.map((o, i) => (
               <button
                 key={o.id}

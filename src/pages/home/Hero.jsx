@@ -137,7 +137,7 @@ export default function Hero() {
           <div className="hero-botoes">
             <Magnetico>
               <Link to="/obras/andamento" className="botao botao-primario">
-                Ver construções
+                Ver obras
               </Link>
             </Magnetico>
             <Magnetico>

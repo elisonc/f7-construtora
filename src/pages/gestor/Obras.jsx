@@ -145,7 +145,7 @@ export default function Obras() {
   const [novaAberta, setNovaAberta] = useState(Boolean(parametros.get("novo")));
 
   useEffect(() => {
-    document.title = "Construções — Painel F7";
+    document.title = "Obras — Painel F7";
     api("/api/gestor/obras")
       .then(setObras)
       .catch((falha) => avisar(falha.message, "erro"));
@@ -170,7 +170,7 @@ export default function Obras() {
     <div className="pagina-gestor">
       <div className="pagina-gestor-topo">
         <div>
-          <h1>Construções</h1>
+          <h1>Obras</h1>
           <p>Atualize etapas, fotos e documentos. O cliente vê tudo na hora.</p>
         </div>
         <button type="button" className="botao botao-primario botao-pequeno" onClick={() => setNovaAberta(true)}>

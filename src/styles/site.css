@@ -88,16 +88,20 @@
 }
 
 /* Header transparente sobre hero: forçar texto branco para contraste */
-.topo:not(.rolado) .topo-nav a,
-.topo:not(.rolado) .suspenso button {
+.topo:not(.rolado) .topo-nav > a,
+.topo:not(.rolado) .suspenso > button {
   color: rgba(255,255,255,0.88);
 }
-.topo:not(.rolado) .topo-nav a:hover,
-.topo:not(.rolado) .suspenso button:hover {
+.topo:not(.rolado) .topo-nav > a:hover,
+.topo:not(.rolado) .suspenso > button:hover {
   color: #fff;
 }
-.topo:not(.rolado) .topo-nav a::after {
+.topo:not(.rolado) .topo-nav > a::after {
   background: #fff;
+}
+/* Dropdown: sempre texto escuro independente do estado do header */
+.suspenso ul a {
+  color: var(--texto) !important;
 }
 .topo:not(.rolado) .topo-acoes .botao-contorno {
   color: #fff;

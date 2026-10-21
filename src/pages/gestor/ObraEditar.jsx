@@ -194,7 +194,7 @@ export default function ObraEditar() {
   return (
     <div className="pagina-gestor">
       <Link to="/gestor/obras" className="voltar">
-        ← Todas as construções
+        ← Todas as obras
       </Link>
       <div className="pagina-gestor-topo">
         <div>

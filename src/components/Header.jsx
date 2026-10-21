@@ -11,7 +11,7 @@ import { linkWhatsApp } from "../config.js";
 const MENU = [
   { texto: "Quem somos", para: "/#sobre" },
   {
-    texto: "Construções",
+    texto: "Obras",
     sub: [
       { texto: "Em andamento", para: "/obras/andamento" },
       { texto: "Concluídas", para: "/obras/concluidas" },
