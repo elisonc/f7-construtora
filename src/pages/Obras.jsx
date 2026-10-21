@@ -82,7 +82,7 @@ export default function Obras() {
     <div ref={ref}>
       <header className="obras-topo secao-escura">
         <div className="container">
-          <span className="sobrelinha">Construções</span>
+          <span className="sobrelinha">Obras</span>
           <h1 data-titulo>{config.titulo}</h1>
           <p data-revelar="blur">{config.texto}</p>
           <nav className="obras-abas" aria-label="Tipo de obra">

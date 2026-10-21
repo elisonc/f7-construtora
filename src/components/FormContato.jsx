@@ -60,12 +60,9 @@ export default function FormContato({ origem, interessePadrao = "", opcoes = [],
           <span>Interesse</span>
           <select name="interesse" defaultValue={interessePadrao}>
             <option value="">Escolha uma opção</option>
-            <option>Contratar a F7 para uma obra</option>
-            <option>Parceria com construtora ou incorporadora</option>
             {opcoes.map((o) => (
               <option key={o}>{o}</option>
             ))}
-            <option>Outro assunto</option>
           </select>
         </label>
       ) : (

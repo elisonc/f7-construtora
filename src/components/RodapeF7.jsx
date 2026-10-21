@@ -11,8 +11,7 @@ export default function RodapeF7() {
       <div className="container rodape-grade">
         <div>
           <Logo />
-          <p className="rodape-slogan">{empresa.slogan}</p>
-          {empresa.site && <span className="rodape-site">{empresa.site}</span>}
+{empresa.site && <span className="rodape-site">{empresa.site}</span>}
         </div>
         <div>
           <h3>Endereço</h3>

@@ -28,7 +28,7 @@ export default function Home() {
       <Regioes />
       <AreaCliente />
       <Chamada />
-      <Contato opcoes={(obras ?? []).filter((o) => o.status === "em_obras").map((o) => o.nome)} />
+      <Contato opcoes={["Saber mais informações", "Parceria com construtora", "Outros assuntos"]} />
     </>
   );
 }

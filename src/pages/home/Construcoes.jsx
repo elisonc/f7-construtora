@@ -48,7 +48,7 @@ export default function Construcoes({ lista }) {
         <div className="projetos-topo">
           <div>
             <span className="sobrelinha" data-revelar>
-              Construções
+              Obras
             </span>
             <h2 data-titulo>Obras em andamento e entregas recentes</h2>
             <p data-revelar="blur">

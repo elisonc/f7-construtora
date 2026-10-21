@@ -22,7 +22,7 @@ export const numeros = [
   { valor: 64000, sufixo: " m²", rotulo: "construídos" },
 ];
 
-export const regioes = ["Curitiba", "Campo Largo", "Pinhais", "Guaratuba"];
+export const regioes = ["Curitiba", "Campo Largo", "Pinhais", "Litoral Paranaense"];
 
 export const temWhatsApp = Boolean(empresa.whatsapp);
 export const linkWhatsApp = (mensagem = "Olá! Vim pelo site da F7 Engenharia Estratégica.") =>
